@@ -220,14 +220,11 @@ async function loadRoomsForSelectedPeriod() {
     return;
   }
 
-  const start = formatDate(state.selectedStart);
-  const end = formatDate(addDays(state.selectedStart, state.days - 1));
-
   roomsList.innerHTML = '<div class="muted">Carregando salas...</div>';
 
   try {
-    // Using apiGet wrapper
-    const data = await apiGet(`/api/assets/rooms?start=${start}&end=${end}`);
+    const resp = await apiGet('/api/rooms.php?action=list');
+    const data = (resp && resp.rooms) || [];
     renderRooms(data);
   } catch (err) {
     console.error(err);
@@ -279,13 +276,11 @@ async function loadEquipmentForSelectedPeriod() {
     return;
   }
 
-  const start = formatDate(state.selectedStart);
-  const end = formatDate(addDays(state.selectedStart, state.days - 1));
-
   equipList.innerHTML = '<div class="muted">Carregando equipamentos...</div>';
 
   try {
-    const data = await apiGet(`/api/assets/equipment?start=${start}&end=${end}`);
+    const resp = await apiGet('/api/equipment.php?action=list');
+    const data = (resp && resp.equipments) || [];
     renderEquipment(data);
   } catch (err) {
     console.error(err);

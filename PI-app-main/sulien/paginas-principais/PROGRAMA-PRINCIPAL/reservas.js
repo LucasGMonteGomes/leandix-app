@@ -229,7 +229,8 @@ async function loadRoomsForSelectedPeriod() {
   roomsList.innerHTML = '<div class="muted">Carregando salas...</div>';
 
   try {
-    const data = await apiGet(`/api/assets/rooms?start=${start}&end=${end}`);
+    const resp = await apiGet('/api/rooms.php?action=list');
+    const data = (resp && resp.rooms) || [];
     renderRooms(data);
   } catch (err) {
     console.error(err);
@@ -287,7 +288,8 @@ async function loadEquipmentForSelectedPeriod() {
   equipList.innerHTML = '<div class="muted">Carregando equipamentos...</div>';
 
   try {
-    const data = await apiGet(`/api/assets/equipment?start=${start}&end=${end}`);
+    const resp = await apiGet('/api/equipment.php?action=list');
+    const data = (resp && resp.equipments) || [];
     renderEquipment(data);
   } catch (err) {
     console.error(err);
