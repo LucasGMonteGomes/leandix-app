@@ -12,6 +12,7 @@ const state = {
   days: 1,
   selectedRooms: [],
   selectedEquipment: [],
+  reservations: []
 };
 
 // ------------------------------
@@ -83,6 +84,8 @@ function renderCalendar() {
     const el = document.createElement('div');
     el.className = 'day';
     if (isSunday(d)) el.classList.add('disabled');
+    const isReserved = state.reservations.some(r => d >= r.start && d <= r.end);
+    if (isReserved) el.classList.add('reserved');
 
     const numero = document.createElement('div');
     numero.className = 'date';
@@ -416,8 +419,10 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  renderCalendar();
-  backBtn.style.display = 'none';
+  loadMyReservations().finally(() => {
+    renderCalendar();
+    backBtn.style.display = 'none';
+  });
 
   const userData = getUserData();
   if (userData) {
@@ -427,3 +432,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (nameEl) nameEl.textContent = name;
   }
 });
+
+async function loadMyReservations() {
+  try {
+    const data = await apiGet('/api/reservations.php?action=my-reservations');
+    const list = data.reservations || [];
+    state.reservations = list.map(r => {
+      const start = new Date((r.data_inicio || '').replace(' ', 'T'));
+      const end = new Date((r.data_fim || '').replace(' ', 'T'));
+      return { start, end };
+    });
+  } catch (err) {
+    console.error('Erro ao carregar reservas do usuário', err);
+    state.reservations = [];
+  }
+}

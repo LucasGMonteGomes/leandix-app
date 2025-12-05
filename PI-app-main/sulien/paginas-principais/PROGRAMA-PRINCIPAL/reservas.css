@@ -237,6 +237,7 @@ main {
 .calendar .day.disabled { opacity: 0.35; cursor: not-allowed; }
 .calendar .day.selected { background: var(--primary); color: #fff; }
 .calendar .day.range { background: linear-gradient(90deg, var(--primary), #6fa8ff); color: #fff; }
+.calendar .day.reserved { background: #ffe3e3; border: 1px solid #ff9e9e; color: #a30000; }
 .calendar .weekday { font-size: 12px; font-weight: 600; color: var(--muted); }
 .calendar .date { font-size: 14px; margin-top: 6px; }
 
