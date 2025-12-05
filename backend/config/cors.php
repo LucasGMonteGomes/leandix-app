@@ -5,39 +5,10 @@
  */
 
 function setupCORS() {
-    // Origens permitidas
-    $allowed_origins = [
-        'http://localhost:3000',
-        'http://127.0.0.1:3000',
-        'http://localhost:5500',  // Live Server VSCode
-    ];
-
-    // Adiciona origem da variável de ambiente (FRONTEND_URL para Railway/Netlify)
-    $frontend_url = getenv('FRONTEND_URL');
-    if ($frontend_url) {
-        $allowed_origins[] = rtrim($frontend_url, '/');
-        // Também adiciona versão com www se não tiver
-        if (strpos($frontend_url, 'www.') === false) {
-            $with_www = str_replace('https://', 'https://www.', $frontend_url);
-            $allowed_origins[] = rtrim($with_www, '/');
-        }
-    }
-
-    // Detecta a origem da requisição
-    $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-
-    // Permite a origem configurada ou, se existir Origin no header, devolve a mesma origem
-    if (!empty($origin)) {
-        header("Access-Control-Allow-Origin: $origin");
-    } else if ($frontend_url) {
-        header("Access-Control-Allow-Origin: " . rtrim($frontend_url, '/'));
-    } else {
-        header("Access-Control-Allow-Origin: http://localhost:3000");
-    }
-
-    header('Access-Control-Allow-Credentials: true');
+    header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
     header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+    header('Access-Control-Allow-Credentials: true');
     header('Content-Type: application/json; charset=utf-8');
 
     // Responde imediatamente para requisições OPTIONS (preflight)
