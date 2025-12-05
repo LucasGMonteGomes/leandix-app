@@ -26,14 +26,12 @@ function setupCORS() {
     // Detecta a origem da requisição
     $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
-    // Verifica se a origem é permitida
-    if (in_array($origin, $allowed_origins)) {
+    // Permite a origem configurada ou, se existir Origin no header, devolve a mesma origem
+    if (!empty($origin)) {
         header("Access-Control-Allow-Origin: $origin");
     } else if ($frontend_url) {
-        // Em produção, usa a URL do frontend configurada
         header("Access-Control-Allow-Origin: " . rtrim($frontend_url, '/'));
     } else {
-        // Fallback para desenvolvimento local
         header("Access-Control-Allow-Origin: http://localhost:3000");
     }
 
