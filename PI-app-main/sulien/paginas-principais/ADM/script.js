@@ -41,19 +41,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 1000);
 
   async function fetchJSON(url, opts){
-    try {
-      const r = await fetch(url, opts);
-      if(!r.ok) throw new Error(r.status);
-      return await r.json();
-    } catch(e){
-      console.warn('fetch fail',url,e);
-      return null;
-    }
+    const r = await fetch(url, opts);
+    if (!r.ok) throw new Error(r.status);
+    return await r.json();
   }
 
   async function carregarUsuario(){
-    const dados = await fetchJSON('/api/usuario');
-    if(!dados){
+    try {
+      const resp = await fetchJSON('/api/profile.php?action=get', { credentials: 'include' });
+      const dados = resp && resp.user ? resp.user : null;
+      if (!dados) throw new Error('sem dados');
+      usuario = dados;
+      userNome.textContent = dados.nome || 'Usuário';
+      userNomeShort.textContent = (dados.nome||'Usuário').split(' ')[0];
+      userTurma.textContent = dados.turno || '3ºADS';
+      userSala.textContent = dados.ra || 'Lab 02';
+      if(dados.foto){
+        userFoto.src = dados.foto;
+        userFotoCard.src = dados.foto;
+      }
+      userEmprestados.textContent = 0;
+      userReservas.textContent = 0;
+      userLimite.textContent = 5;
+    } catch(e){
       usuario = { id:1 };
       userNome.textContent = 'Gabriel Silva';
       userNomeShort.textContent = 'Gabriel';
@@ -61,23 +71,10 @@ document.addEventListener('DOMContentLoaded', () => {
       userSala.textContent = 'Lab 02';
       userFoto.src = 'img/avatar-placeholder.png';
       userFotoCard.src = 'img/avatar-placeholder.png';
-      userEmprestados.textContent = 1;
-      userReservas.textContent = 2;
+      userEmprestados.textContent = 0;
+      userReservas.textContent = 0;
       userLimite.textContent = 5;
-      return;
     }
-    usuario = dados;
-    userNome.textContent = dados.nome || 'Usuário';
-    userNomeShort.textContent = (dados.nome||'Usuário').split(' ')[0];
-    userTurma.textContent = dados.turma || '—';
-    userSala.textContent = dados.sala || '—';
-    if(dados.foto){
-      userFoto.src = dados.foto;
-      userFotoCard.src = dados.foto;
-    }
-    userEmprestados.textContent = dados.emprestados ?? 0;
-    userReservas.textContent = dados.reservas ?? 0;
-    userLimite.textContent = dados.limite ?? 5;
   }
 
   async function carregarReservas(mes,ano){
