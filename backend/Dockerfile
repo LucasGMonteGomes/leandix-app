@@ -8,7 +8,7 @@ RUN a2enmod rewrite headers
 
 # Configurar PHP
 RUN echo "session.cookie_samesite = None" >> /usr/local/etc/php/conf.d/custom.ini && \
-    echo "session.cookie_secure = Off" >> /usr/local/etc/php/conf.d/custom.ini && \
+    echo "session.cookie_secure = On" >> /usr/local/etc/php/conf.d/custom.ini && \
     echo "upload_max_filesize = 10M" >> /usr/local/etc/php/conf.d/custom.ini && \
     echo "post_max_size = 10M" >> /usr/local/etc/php/conf.d/custom.ini
 
