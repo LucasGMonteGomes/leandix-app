@@ -17,6 +17,8 @@
 
   <!-- script principal -->
   <script src="script.js" defer></script>
+  <script src="../config.js"></script>
+  <script src="api-config.js"></script>
 
   <!-- script interações -->
   <script src="INTERACOES.JS" defer></script>
@@ -135,30 +137,6 @@
           </div>
         </section>
 
-        <!-- RIGHT: painel lateral com mini calendário -->
-        <!-- RIGHT: painel lateral com mini calendário (equipamentos removidos) -->
-        <aside class="right-col">
-          <!-- Mini calendário -->
-          <div class="card mini-cal" aria-hidden="false">
-            <div class="mini-top">
-              <button id="miniPrev" class="icon-btn small" aria-label="Mês anterior" data-i18n="calendar_prev"><i
-                  class="fa-solid fa-chevron-left"></i></button>
-              <div id="miniMonth" class="mini-month">Jan 2025</div>
-              <button id="miniNext" class="icon-btn small" aria-label="Próximo mês" data-i18n="calendar_next"><i
-                  class="fa-solid fa-chevron-right"></i></button>
-            </div>
-            <div class="mini-weekdays">
-              <div data-i18n="week_sun_short">D</div>
-              <div data-i18n="week_mon_short">S</div>
-              <div data-i18n="week_tue_short">T</div>
-              <div data-i18n="week_wed_short">Q</div>
-              <div data-i18n="week_thu_short">Q</div>
-              <div data-i18n="week_fri_short">S</div>
-              <div data-i18n="week_sat_short">S</div>
-            </div>
-            <div id="miniDates" class="mini-dates"></div>
-          </div>
-        </aside>
       </section>
     </main>
   </div>
