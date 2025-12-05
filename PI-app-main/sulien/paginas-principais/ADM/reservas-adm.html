@@ -8,7 +8,6 @@
   <title data-i18n="reservations_title">Reservas — Leandix</title>
 
   <!-- Fonte Poppins -->
-
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
@@ -16,10 +15,9 @@
   <link rel="stylesheet" href="assets/global.css">
   <link rel="stylesheet" href="reservas.css">
 
-  <!-- config (tema + idioma) -->
-
+  <script src="../config.js"></script>
+  <script src="api-config.js"></script>
   <script src="assets/config.js" defer></script>
-
   <script src="INTERACOES.JS" defer></script>
 
 </head>
@@ -32,7 +30,7 @@
   </div>
 
   <nav class="nav" role="navigation" aria-label="Menu">
-    <button class="nav-btn" data-route="home" title="home" onclick="PGHomeAnimada()">
+    <button class="nav-btn" data-route="home" title="home" onclick="window.location.href='home-adm.html'">
       <i class="fa-solid fa-house"></i><span data-i18n="menu_home">Home</span>
     </button>
 

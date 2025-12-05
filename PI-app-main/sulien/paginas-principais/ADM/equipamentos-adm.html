@@ -13,25 +13,10 @@
     <link rel="stylesheet" href="assets/global.css">
     <link rel="stylesheet" href="usuario.css">
 
-    <!-- Camada de Infraestrutura (DDD) -->
-    <script src="domain/models/Equipment.js" defer></script>
-    <script src="domain/models/Room.js" defer></script>
-    <script src="domain/repositories/EquipmentRepository.js" defer></script>
-    <script src="domain/repositories/RoomRepository.js" defer></script>
-
-    <!-- Aplicação (Application Layer / Services com Patterns) -->
-    <script src="application/services/EquipmentService.js" defer></script>
-    <script src="application/services/RoomService.js" defer></script>
-
-    <!-- UI (Presentation Layer) -->
-    <script src="presentation/controllers/EquipmentController.js" defer></script>
-    <script src="presentation/controllers/RoomController.js" defer></script>
-
-    <!-- JS global -->
+    <script src="../config.js" defer></script>
+    <script src="api-config.js" defer></script>
     <script src="assets/config.js" defer></script>
     <script src="assets/i18n.js" defer></script>
-
-    <!-- JS local estruturado seguindo DDD -->
     <script src="equipamentos.js" defer></script>
     <script src="INTERACOES.JS" defer></script>
 </head>
@@ -63,7 +48,7 @@
         </div>
 
         <nav class="nav">
-            <button class="nav-btn" onclick="PGHomeAnimada()" data-route="home">
+            <button class="nav-btn" onclick="window.location.href='home-adm.html'" data-route="home">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </button>
