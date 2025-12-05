@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sulien</title>
+  <link rel="stylesheet" href="sulien.css" />
+
+  <script src="script.js" defer></script>
+
+  <script src="interacao.js" defer></script>
+
+  <style>
+    /* Rolagem suave */
+    html 
+    {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div>
+      <img src="img/vetorsulien.svg" alt="logo vetorsulien">
+    </div>
+  </header>
+
+    <!-- Seção de Apresentação do Aplicativo -->
+  <section id="apresentacao-app" class="apresentacao-container reveal">
+    <div class="apresentacao-content">
+
+      <div class="texto">
+        <h1>Seu Aplicativo Inteligente Está Pronto!</h1>
+        <p>
+          O <strong>Leandix</strong> foi desenvolvido com tecnologia moderna, alto desempenho
+          e pensado para facilitar seu dia a dia. Rápido, intuitivo e seguro.
+        </p>
+
+        <ul>
+          <li>✔ Interface simples e fácil de usar</li>
+          <li>✔ Informações rápidas e organizadas</li>
+          <li>✔ Segurança avançada para seus dados</li>
+          <li>✔ Conectado diretamente à central Sulien</li>
+        </ul>
+
+      </div>
+
+      <div class="imagem">
+        <img src="img/logo2.svg" alt="Mockup do Aplicativo Leandix">
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA - Acesse o App -->
+  <section class="cta-banner" id="acessoapp">
+    <h2>Acesse o Leandix <span>agora mesmo!</span></h2>
+    <a onclick="animacaoLogin()" class="cta-button" style="cursor: pointer; font-weight: 700; /* deixa a fonte mais grossa */">Acessar o App</a>
+    <br></br>
+    <h2>Download<span> do Leandix </span></h2>
+    <a onclick="animacaoDowload()" class="cta-button" style="cursor: pointer; font-weight: 700; /* deixa a fonte mais grossa */">Download</a>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer" id="faleconosco">
+    <p>
+      Sulien © 2025 |
+      <a href="#">Política de Segurança da Informação</a> |
+      <a href="#">Código de Ética</a>
+    </p>
+    <p>
+      <a href="#">Política de Privacidade</a> |
+      <a href="#">LGPD</a> |
+      <a href="#">Política Anticorrupção</a>
+    </p>
+  </footer>
+
+  <!-- Notificação -->
+  <div id="notificacao" class="notificacao">Bem-vindo(a) à Sulien!</div>
+</body>
+</html>

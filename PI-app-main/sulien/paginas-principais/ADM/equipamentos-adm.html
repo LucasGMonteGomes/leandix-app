@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Equipamentos - Admin</title>
+
+    <!-- Fontes e ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- CSS global -->
+    <link rel="stylesheet" href="assets/global.css">
+    <link rel="stylesheet" href="usuario.css">
+
+    <!-- Camada de Infraestrutura (DDD) -->
+    <script src="domain/models/Equipment.js" defer></script>
+    <script src="domain/models/Room.js" defer></script>
+    <script src="domain/repositories/EquipmentRepository.js" defer></script>
+    <script src="domain/repositories/RoomRepository.js" defer></script>
+
+    <!-- Aplicação (Application Layer / Services com Patterns) -->
+    <script src="application/services/EquipmentService.js" defer></script>
+    <script src="application/services/RoomService.js" defer></script>
+
+    <!-- UI (Presentation Layer) -->
+    <script src="presentation/controllers/EquipmentController.js" defer></script>
+    <script src="presentation/controllers/RoomController.js" defer></script>
+
+    <!-- JS global -->
+    <script src="assets/config.js" defer></script>
+    <script src="assets/i18n.js" defer></script>
+
+    <!-- JS local estruturado seguindo DDD -->
+    <script src="equipamentos.js" defer></script>
+    <script src="INTERACOES.JS" defer></script>
+</head>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const areaSelect = document.getElementById("Area");
+        const turnoGroup = document.getElementById("turnoGroup");
+
+        areaSelect.addEventListener("change", function () {
+            if (areaSelect.value === "PROFESSOR") {
+                turnoGroup.style.display = "block"; // mostra
+            } else {
+                turnoGroup.style.display = "none"; // esconde
+            }
+        });
+    });
+</script>
+
+
+<body>
+
+<div class="app" aria-hidden="true">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand">
+            <img class="brand-logo" src="img/logo2.svg" alt="Leandix">
+        </div>
+
+        <nav class="nav">
+            <button class="nav-btn" onclick="PGHomeAnimada()" data-route="home">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </button>
+
+            <button class="nav-btn" onclick="PGUsuario()" data-route="user">
+                <i class="fa-solid fa-user"></i>
+                <span>Usuários</span>
+            </button>
+
+            <button class="nav-btn active" data-route="equipamentos">
+                <i class="fa-solid fa-box"></i>
+                <span>Equipamentos</span>
+            </button>
+
+            <button class="nav-btn" onclick="PGReservas()" data-route="reservations">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Reservas</span>
+            </button>
+
+            <button class="nav-btn" onclick="PGConfiguracoes()" data-route="settings">
+                <i class="fa-solid fa-gear"></i>
+                <span>Configurações</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="ghost" aria-label="Sair" onclick="PGLogin()">Sair</button>
+        </div>
+    </aside>
+
+    <!-- CONTEÚDO -->
+    <main class="main-content">
+
+        <h1>Gerenciamento de Equipamentos e Salas</h1>
+
+        <!-- BOTÃO DE ADICIONAR -->
+        <section class="addusuario" onclick="abrirModal()">
+            <div class="textadd">
+                <h3>Adicionar</h3>
+            </div>
+        </section>
+
+        <!-- LISTA -->
+        <section class="historico">
+            <h3>Equipamentos e Salas Cadastrados</h3>
+            <div id="equipamentos-list"></div>
+        </section>
+
+    </main>
+
+</div>
+
+<!-- MODAL -->
+<div id="modalEquipamento" class="modal hidden">
+    <div class="modal-content">
+        <h2 id="modalTitle">Adicionar</h2>
+        <form id="formEquipamento">
+
+            <label>Tipo:</label>
+            <select id="tipo" required>
+                <option value="" disabled selected>Selecione o tipo...</option>
+                <option value="EQUIPMENT">Equipamento</option>
+                <option value="ROOM">Sala</option>
+            </select>
+
+            <!-- CAMPOS EQUIPAMENTO -->
+            <div id="equipmentFields" style="display: none;">
+                <label>Nome:</label>
+                <input type="text" id="nome" placeholder="Ex: Notebook Dell" required />
+
+                <label>Número de Série:</label>
+                <input type="text" id="serialNumber" placeholder="Ex: ABC123456" />
+
+                <label>Quantidade Total:</label>
+                <input type="number" id="quantity" min="1" placeholder="Ex: 10" />
+
+                <label>Estado/Condição:</label>
+                <select id="condition">
+                    <option value="">Selecione...</option>
+                    <option value="Novo">Novo</option>
+                    <option value="Bom">Bom</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Precisa Manutenção">Precisa Manutenção</option>
+                </select>
+
+                <label>Localização Padrão:</label>
+                <input type="text" id="defaultLocation" placeholder="Ex: Almoxarifado" />
+
+                <label>Descrição (opcional):</label>
+                <textarea id="description" rows="3" placeholder="Detalhes do equipamento"></textarea>
+            </div>
+
+            <!-- CAMPOS SALA -->
+            <div id="roomFields" style="display: none;">
+                <label>Nome:</label>
+                <input type="text" id="nomeRoom" placeholder="Ex: Sala 101" required />
+
+                <label>Capacidade (pessoas):</label>
+                <input type="number" id="capacity" min="1" placeholder="Ex: 30" />
+
+                <label>Tipo de Sala:</label>
+                <select id="roomType">
+                    <option value="">Selecione...</option>
+                    <option value="Sala de Aula">Sala de Aula</option>
+                    <option value="Laboratório">Laboratório</option>
+                    <option value="Auditório">Auditório</option>
+                    <option value="Biblioteca">Biblioteca</option>
+                    <option value="Outro">Outro</option>
+                </select>
+
+                <label>Andar:</label>
+                <input type="text" id="floor" placeholder="Ex: 1º Andar" />
+
+                <label>Recursos Disponíveis:</label>
+                <input type="text" id="resources" placeholder="Ex: Projetor, Ar-condicionado" />
+
+                <label>Observações (opcional):</label>
+                <textarea id="observations" rows="3" placeholder="Informações sobre a sala"></textarea>
+            </div>
+
+            <input type="hidden" id="equipamentoId" />
+
+            <button type="submit" class="btn-confirmar">Salvar</button>
+            <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

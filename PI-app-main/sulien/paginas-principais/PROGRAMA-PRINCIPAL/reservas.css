@@ -1,0 +1,476 @@
+:root {
+  --bg: #f3f6fb;
+  --primary: #55A3FF;
+  --accent: #8f6bff;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #0f1724;
+  --glass: rgba(255,255,255,0.75);
+  --radius: 14px;
+  --shadow: 0 8px 28px rgba(15,23,36,0.07);
+  --radius-sm: 10px;
+  --success: #28a745;
+  --warn: #ffb703;
+  --danger: #ff6b6b;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+}
+body {
+  font-family: 'Poppins', system-ui, Segoe UI, Roboto, Arial;
+  background: linear-gradient(180deg, var(--bg), #ffffff);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --------------------------
+   Layout principal
+---------------------------*/
+  .app
+  {
+    display:flex;
+    flex:1;
+    min-height:100vh
+  }
+  .sidebar
+  { 
+    width:96px;
+    background-color: #55A3FF;
+    height:100vh;
+    padding:18px 10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-shadow: 8px 0 30px rgba(36,107,255,0.08);
+    position:sticky;top:0 
+  }
+  .brand
+  {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px
+  }
+  .brand-logo
+  {
+    width:210px;
+    height:100px
+  }
+  .brand-name
+  {
+    font-weight:700;
+    color:#fff;
+    font-size:12px;
+    opacity:0.95
+  }
+  .nav
+  {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:18px
+  }
+  .nav-btn
+  {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;border:none;
+    background:none;
+    color:#ffffff;
+    padding:10px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:12px;
+    opacity:0.95;
+    margin-top: 20px; /* empurra a nav 200px para baixo */
+  }
+  .nav-btn i
+  {
+    font-size:18px
+  }
+  .nav-btn span
+  {
+    display:block;
+    font-size:11px
+  }
+  .nav-btn:hover
+  {
+    background:rgba(255,255,255,0.06)
+  }
+  .nav-btn.active
+  {
+    background:rgba(0,0,0,0.09)
+  }
+  .sidebar-footer
+  {
+    display:flex;
+    justify-content:center
+  }
+  .ghost
+  {
+    background:none;
+    border:none;
+    color:#fff;
+    padding:8px 10px;
+    border-radius:8px;
+    cursor:pointer
+  }
+
+  .main
+  {
+    flex:1;
+    display:flex;
+    flex-direction:column
+  }
+  .topbar
+  {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 22px;
+    background:transparent
+  }
+  .page-title
+  {
+    font-size:20px;
+    color:var(--text);
+    font-weight:600
+  }
+  .user-short
+  {
+    display:flex;
+    align-items:center;
+    gap:10px
+  }
+  .user-short img
+  {
+    width:44px;
+    height:44px;
+    border-radius:10px;
+    object-fit:cover
+  }
+
+  .content
+  {
+    display:flex;
+    gap:22px;
+    padding:0 22px 28px
+  }
+  .left-col
+  {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    max-width:980px
+  }
+  .right-col
+  {
+    width:340px;
+    display:flex;
+    flex-direction:column;
+    gap:18px
+  }
+
+
+/* --------------------------
+   Card principal
+---------------------------*/
+main {
+  display: flex;           /* ativa o flexbox */
+  justify-content: center; /* centraliza horizontalmente */
+  align-items: center;     /* centraliza verticalmente */
+  min-height: 100vh;       /* garante que ocupe toda a altura da tela */
+  flex-direction: column;  /* se houver mais elementos, empilha verticalmente */
+  max-width: 110%;
+  margin-right: 20px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  
+}
+.card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.card header h1 { font-size: 18px; }
+
+/* --------------------------
+   Step content
+---------------------------*/
+.step-content { min-height: 420px; }
+
+/* --------------------------
+   Calendário
+---------------------------*/
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+.calendar .day {
+  background: var(--glass);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+.calendar .day.disabled { opacity: 0.35; cursor: not-allowed; }
+.calendar .day.selected { background: var(--primary); color: #fff; }
+.calendar .day.range { background: linear-gradient(90deg, var(--primary), #6fa8ff); color: #fff; }
+.calendar .weekday { font-size: 12px; font-weight: 600; color: var(--muted); }
+.calendar .date { font-size: 14px; margin-top: 6px; }
+
+/* Controles do calendário */
+.calendar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* BOTÕES – Estilo profissional (Glass + suave + hover + active) */
+.calendar-controls button {
+  border: none;
+  background: rgba(85,163,255,0.16);
+  color: var(--text);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  font-weight: 900;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+  margin: 0 9px; /* 6px para cada lado */
+  margin-bottom: 9px;
+}
+
+/* HOVER */
+.calendar-controls button:hover {
+  background: rgba(85,163,255,0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(85,163,255,0.25);
+}
+
+/* ACTIVE (pressionado) */
+.calendar-controls button:active {
+  transform: translateY(0px);
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(85,163,255,0.35);
+}
+
+
+/* --------------------------
+   Lista de itens
+---------------------------*/
+.list, .equip-list { display: grid; gap: 10px; }
+.list .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  background: #f8fbff;
+}
+.list .item .meta { display: flex; flex-direction: column; }
+.list .item button {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+}
+.muted { color: var(--muted); font-size: 13px; }
+
+
+
+
+/* Footer de ações */
+/* ========================
+BOTÕES GERAIS
+======================== */
+/* ========================
+BOTÕES GERAIS (todas as ações)
+======================== */
+.btn {
+padding: 10px 16px;
+border-radius: 10px;
+border: none;
+cursor: pointer;
+font-weight: 500;
+transition: 0.25s ease;
+}
+
+/* Ghost (transparente) */
+.btn.ghost {
+background: rgba(85,163,255,0.16);
+border: 1px solid #dfe7ff;
+color: var(--text);
+box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+}
+
+/* Primary */
+.btn.primary {
+background: rgba(85,163,255,0.16);
+color: var(--text);
+box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+padding: 10px 16px;
+}
+
+/* Hover geral */
+.btn:hover {
+transform: translateY(-2px);
+}
+
+/* Active geral */
+.btn:active {
+transform: translateY(0);
+}
+
+/* ========================
+FOOTER DE AÇÕES
+======================== */
+.actions {
+display: flex;
+justify-content: space-between;
+gap: 12px;
+margin-top: 18px;
+}
+.actions .left {
+display: flex;
+gap: 8px;
+}
+
+/* ========================
+CONTROLES DO CALENDÁRIO
+======================== */
+.calendar-controls {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 16px;
+}
+
+
+
+/* ========================
+TEXTAREA ESTILO
+======================== */
+#obs {
+width: 100%;
+padding: 10px;
+border-radius: 8px;
+border: 1px solid #ccc;
+resize: vertical;
+}
+
+
+
+
+
+
+
+/* Resumo */
+.summary { display: flex; flex-direction: column; gap: 10px; }
+.summary .row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #fbfdff;
+  border-radius: 8px;
+}
+
+/* --------------------------
+   Responsividade
+---------------------------*/
+@media (max-width: 1200px) {
+   main { 
+    width: 80%; 
+  }
+}
+@media (max-width: 900px) {
+  .app { 
+    flex-direction: column; 
+    padding-bottom: 80px; 
+  }
+  .brand, 
+  .brand-logo {
+    display: none;
+  }
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 18px;
+    border-radius: 0;
+  }
+  .nav{ 
+    flex-direction: row; 
+    width: 100%; 
+    justify-content: space-around; 
+    margin-top: 0; 
+  }
+  main { 
+    margin-top: 96px;
+    width: 90%; 
+  }
+  .card { 
+    padding: 12px; 
+  }
+  .equip-list { 
+    grid-template-columns: 1fr; 
+    gap: 12px; 
+  }
+}
+
+
+@media (max-width: 540px) {
+  .equip-item img { 
+    width: 50px; 
+    height: 50px; 
+  }
+  .calendar { 
+    gap: 5px; 
+  }
+}
+
+
+@media (max-width: 420px) {
+  .equip-item { 
+    flex-direction: column; 
+    text-align: center; 
+  }
+  .equip-actions { 
+    justify-content: center; 
+  }
+  .calendar .day { 
+    padding: 6px; 
+    font-size: 12px; 
+  }
+}

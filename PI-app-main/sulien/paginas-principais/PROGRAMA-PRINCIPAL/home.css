@@ -1,0 +1,697 @@
+
+  /* -------------------------------------------------------------
+     Updated single-file CSS: modern, clean, fully responsive
+     - marks today's date on both calendars
+     - mini calendar syncs with main calendar and highlights selected day
+  --------------------------------------------------------------*/
+  :root
+  {
+    --bg:#f3f6fb;
+    --primary:#246bff; /* slightly deeper */
+    --accent:#8f6bff;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --text:#0f1724;
+    --glass: rgba(255,255,255,0.75);
+    --radius:14px;
+    --shadow: 0 8px 28px rgba(15,23,36,0.07);
+    --radius-sm:10px;
+    --success:#28a745;
+    --warn:#ffb703;
+    --danger:#ff6b6b;
+  }
+
+  /* Reset */
+  *
+  {
+    box-sizing:border-box;
+    margin:0;padding:0
+  }
+  html,body
+  {
+    height:100%
+  }
+  body
+  {
+    font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; 
+    background:linear-gradient(180deg,var(--bg),#ffffff); 
+    color:var(--text); 
+    -webkit-font-smoothing:antialiased; 
+    display:flex; min-height:100vh
+  }
+
+  /* Layout */
+  .app
+  {
+    display:flex;
+    flex:1;
+    min-height:100vh
+  }
+  .sidebar
+  { 
+    width:96px;
+    background-color: #55A3FF;
+    height:100vh;
+    padding:18px 10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-shadow: 8px 0 30px rgba(36,107,255,0.08);
+    position:sticky;top:0 
+  }
+  .brand
+  {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px
+  }
+  .brand-logo
+  {
+    width:210px;
+    height:100px
+  }
+  .brand-name
+  {
+    font-weight:700;
+    color:#fff;
+    font-size:12px;
+    opacity:0.95
+  }
+  .nav
+  {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:18px
+  }
+  .nav-btn
+  {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    border:none;
+    background:none;
+    color:#ffffff;
+    padding:10px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:12px;
+    opacity:0.95;
+    margin-top: 20px; /* empurra a nav 200px para baixo */
+  }
+  .nav-btn i
+  {
+    font-size:18px
+  }
+  .nav-btn span
+  {
+    display:block;
+    font-size:11px
+  }
+  .nav-btn:hover
+  {
+    background:rgba(255,255,255,0.06)
+  }
+  .nav-btn.active
+  {
+    background:rgba(0,0,0,0.09)
+  }
+  .sidebar-footer
+  {
+    display:flex;
+    justify-content:center
+  }
+
+
+  /* */
+  .ghost
+  {
+    background:none;
+    border:none;
+    color:#fff;
+    padding:8px 10px;
+    border-radius:8px;
+    cursor:pointer
+  }
+
+  .main
+  {
+    flex:1;
+    display:flex;
+    flex-direction:column
+  }
+  .topbar
+  {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 22px;
+    background:transparent
+  }
+  .page-title
+  {
+    font-size:20px;
+    color:var(--text);
+    font-weight:600
+  }
+  .user-short
+  {
+    display:flex;
+    align-items:center;
+    gap:10px
+  }
+  .user-short img
+  {
+    width:44px;
+    height:44px;
+    border-radius:10px;
+    object-fit:cover
+  }
+
+  .content
+  {
+    display:flex;
+    gap:22px;
+    padding:0 22px 28px
+  }
+  .left-col
+  {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    max-width:980px
+  }
+  .right-col
+  {
+    width:340px;
+    display:flex;
+    flex-direction:column;
+    gap:18px
+  }
+
+
+/* Card base */
+.card
+{
+  background:var(--card);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:16px
+}
+.user-card
+{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  padding:18px 20px;
+  border-left:6px solid var(--primary)
+}
+.avatar-big
+{
+  width:92px;
+  height:92px;
+  border-radius:14px;
+  background:linear-gradient(180deg,#fff,#f2f6ff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden
+}
+.avatar-big img
+{
+  width:88px;
+  height:88px;
+  object-fit:cover;
+  border-radius:12px
+}
+.user-right h2
+{
+  font-size:20px;
+  margin-bottom:6px
+}
+.muted
+{
+  color:var(--muted);
+  font-size:13px
+}
+.user-meta
+{
+  display:flex;
+  gap:18px;
+  margin-top:12px
+}
+.user-meta div
+{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start
+}
+.user-meta strong
+{
+  font-size:18px
+}
+.user-meta small
+{
+  color:var(--muted);
+  font-size:12px
+}
+
+/* Main calendar */
+.calendario-card
+{
+  padding:14px;
+  border:3px solid rgba(143,107,255,0.08);
+  min-height:420px
+}
+.cal-header
+{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px
+}
+.icon-btn
+{
+  border:none;
+  background:none;
+  padding:8px;
+  border-radius:8px;
+  cursor:pointer
+}
+.icon-btn.small
+{
+  padding:6px
+}
+.month-year
+{
+font-weight:700
+}
+.weekdays
+{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+  text-align:center;
+  color:var(--muted);
+  font-weight:700;
+  margin-bottom:8px
+}
+.dates-grid
+{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:10px;
+  min-height:320px
+}
+.dates-grid .date
+{
+  padding:12px 8px;
+  border-radius:12px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .12s ease;
+  background:transparent
+}
+.date:hover
+{
+  transform:translateY(-6px);
+  box-shadow:0 10px 28px rgba(15,23,36,0.06)
+}
+.date.empty
+{
+  background:transparent;
+  box-shadow:none;
+  cursor:default
+}
+.date.today
+{
+  background:linear-gradient(180deg,var(--primary), #1d57d6);
+  color:#fff;font-weight:700
+}
+.date.selected
+{
+  outline:3px solid rgba(36,107,255,0.12);
+  box-shadow:0 6px 16px rgba(36,107,255,0.08)
+}
+.date.unavailable
+{
+  background:linear-gradient(180deg,var(--danger),#c84b4b);
+  color:#fff
+}
+.date.reserved
+{
+  background:linear-gradient(180deg,var(--warn),#ff9e1a);
+  color:#fff
+}
+.date.yours
+{
+  background:linear-gradient(180deg,var(--success),#2ed06a);
+  color:#fff
+}
+.date .dot
+{
+  display:block;
+  margin-top:8px;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:#fff;
+  opacity:0.9;
+  margin-left:auto;
+  margin-right:auto
+}
+
+/* Mini calendar */
+.mini-cal
+{
+  padding:12px
+}
+.mini-top
+{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:8px
+}
+.mini-month
+{
+  font-weight:700
+}
+.mini-weekdays
+{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+  text-align:center;
+  color:var(--muted);
+  font-weight:700;
+  font-size:12px
+}
+.mini-dates
+{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px
+}
+.mini-dates .mdate
+{
+  padding:8px 6px;
+  border-radius:8px;
+  text-align:center;
+  font-size:13px;
+  cursor:pointer;
+  transition:all .12s ease;
+  background:transparent
+}
+.mini-dates .mdate.today
+{
+  background:rgba(36,107,255,0.12);
+  font-weight:700
+}
+.mini-dates .mdate.selected
+{
+  background:rgba(36,107,255,0.18);
+  box-shadow:0 6px 18px rgba(36,107,255,0.06)
+}
+.mini-dates .mdate.has
+{
+  position:relative
+}
+.mini-dates .mdate .badge
+{
+  position:absolute;
+  bottom:6px;
+  left:50%;
+  transform:translateX(-50%);
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--warn)
+}
+
+/* Botões gerais */
+.btn
+{
+  padding:8px 12px;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  font-weight:600
+}
+.btn.primary
+{
+  background:var(--primary);
+  color:#fff
+}
+.btn.ghost
+{
+  background:var(--primary);
+  border:1px solid #eee
+}
+.btn.warn
+{
+  background:var(--warn);
+  color:#fff
+}
+
+/* Modal */
+.modal
+{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(15,23,36,0.36);
+  z-index:999;
+  margin:0
+}
+.modal.hidden
+{
+  display:none
+}
+.modal-card
+{
+  background:var(--card);
+  padding:18px;
+  border-radius:12px;
+  max-width:480px;
+  width:92%;
+  box-shadow:var(--shadow)
+}
+.modal-actions
+{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  margin-top:12px
+}
+
+/* -----------------------------------------------------
+   BOTÕES DO CALENDÁRIO — SOFT UI ELEGANTE
+----------------------------------------------------- */
+.icon-btn,
+.icon-btn.small {
+    height: 42px;
+
+    border-radius: 12px;
+    border: none;
+
+    background: #f1f4fa;
+    box-shadow:
+        4px 4px 10px rgba(0,0,0,0.08),
+        -4px -4px 10px rgba(255,255,255,0.9);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+    font-weight: 600;
+    color: #3b4a6b;
+
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+
+
+/* Hover — sombra invertida (efeito premium) */
+.icon-btn:hover,
+.icon-btn.small:hover {
+    background: #ffffff;
+    box-shadow:
+        inset 4px 4px 10px rgba(0,0,0,0.09),
+        inset -4px -4px 10px rgba(255,255,255,0.9);
+
+    transform: translateY(-2px);
+}
+
+/* Clique — afunda suavemente */
+.icon-btn:active,
+.icon-btn.small:active {
+    transform: translateY(1px) scale(0.97);
+    box-shadow:
+        inset 6px 6px 12px rgba(0,0,0,0.18),
+        inset -6px -6px 12px rgba(255,255,255,0.7);
+}
+
+/* Foco (acessibilidade, bem discreto) */
+.icon-btn:focus-visible,
+.icon-btn.small:focus-visible {
+    outline: 2px solid rgba(70, 120, 255, 0.5);
+    outline-offset: 3px;
+}
+
+
+/* ============================================================
+   RESPONSIVIDADE PROFISSIONAL → MOBILE FIRST
+============================================================ */
+
+/* ----- Tablets médios (até 900px) ----- */
+@media (max-width: 900px) {
+ .sidebar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 18px;
+  }
+
+   .brand, 
+  .brand-logo {
+    display: none;
+  }
+
+  .nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 0;
+  }
+
+  .nav-btn {
+    flex-direction: column;
+    padding: 6px;
+  }
+
+  .nav-btn i {
+    font-size: 22px;
+  }
+
+  .nav-btn span {
+    font-size: 10px;
+  }
+  .app {
+    padding-bottom: 80px;
+  }
+
+  .content {
+    flex-direction: column;
+    padding: 0 12px;
+    gap: 16px;
+  }
+
+  .left-col {
+    order: 1;
+    width: 100%;
+  }
+
+  .right-col {
+    order: 2;
+    width: 100%;
+  }
+
+  .calendario-card {
+    min-height: auto;
+    padding: 12px;
+  }
+
+  .dates-grid {
+    gap: 6px;
+  }
+
+  .dates-grid .date {
+    padding: 10px 6px;
+    font-size: 14px;
+  }
+
+  .mini-cal {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .user-card
+  {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .main {
+    flex: 1;
+    margin-left: 0;
+    margin-top: 100px;
+  }
+}
+
+/* ----- Mobile (até 720px) ----- */
+@media (max-width: 720px) {
+  .sidebar {
+     position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 18px;
+  }
+
+  .brand, 
+  .brand-logo {
+    display: none;
+  }
+  .content {
+    flex-direction: column;
+    padding: 0 12px;
+    gap: 16px;
+  }
+
+  .left-col {
+    order: 1;
+    width: 100%;
+  }
+
+  .right-col {
+    order: 2;
+    width: 100%;
+  }
+
+  .calendario-card {
+    min-height: auto;
+    padding: 12px;
+  }
+
+  .dates-grid {
+    gap: 6px;
+  }
+
+  .dates-grid .date {
+    padding: 10px 6px;
+    font-size: 14px;
+  }
+
+  .mini-cal {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+    .user-card
+  {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sulien</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="script.js" defer></script>
+
+  <script src="interacao.js" defer></script>
+
+    <link rel="manifest" href="manifest.txt">
+
+    <meta charset="UTF-8"> <!-- Define a codificação do texto como UTF-8 (suporta acentos, emojis e caracteres especiais) -->
+    <meta name="theme-color" content="#2b2b2b"> <!-- Cor da barra do navegador no celular e do tema quando o PWA é instalado -->
+    <meta name="theme-color" content="#ffffff"> <!-- detectar se o manifest e o pwa esta certo -->
+
+    <!-- Ícone do app -->
+    <link rel="icon" href="img/logo2sulien 192x192.png" type="image/png">
+  
+    <!-- 🔥 Open Graph (Preview no WhatsApp, Facebook, Instagram e LinkedIn) -->
+    <meta property="og:title" content="Sulien — Plataforma Inteligente de Gestão Empresarial">
+    <meta property="og:description" content="Automatize processos, centralize dados e aumente a eficiência da sua empresa com a Sulien. Tecnologia de ponta, suporte dedicado e soluções sob medida.">
+    <meta property="og:image" content="https://sulienform.wuaze.com/img/logo2sulien600x338.png">
+    <meta property="og:url" content="https://sulienform.wuaze.com/">
+    <meta property="og:type" content="website">
+
+    <!-- 🐦 Twitter Card (Melhor visual no X / Twitter) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sulien — Plataforma Inteligente de Gestão Empresarial">
+    <meta name="twitter:description" content="Transforme sua empresa com automação, relatórios inteligentes e tecnologia profissional desenvolvida pela Sulien.">
+    <meta name="twitter:image" content="https://sulienform.wuaze.com/img/logo2sulien600x338.png">
+
+    <!-- 🔍 SEO para Google -->
+    <meta name="description" content="A Sulien oferece soluções avançadas de gestão empresarial, automação, controle de ativos e tecnologias inteligentes para empresas de todos os portes.">
+    <meta name="keywords" content="Sulien, gestão empresarial, automação, controle de ativos, plataforma empresarial, tecnologia corporativa, software empresarial">
+    <meta name="author" content="Sulien Enterprises">
+</head>
+
+<body>
+  <!-- Cabeçalho -->
+  <header>
+    <div>
+      <img src="img/vetorsulien.svg" alt="logo vetorsulien">
+    </div>
+
+    <!-- Botão hambúrguer -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu">
+      ☰
+    </button>
+
+    <nav id="menu">
+      <a href="#sobre-nos">Sobre nós</a>
+      <a href="#informacoesdoapp">Informações do app</a>
+      <a href="#faleconosco">Fale conosco</a>
+      <a href="#acessoapp">Acesse o app</a>
+      <a href="animacao3.html">Painel Administrativo</a>
+    </nav>
+  </header>
+
+  <!-- Seção 1 -->
+  <section class="section1">
+    <div class="text">
+      <h1>Transforme sua empresa em uma <strong>Potência Digital.</strong></h1>
+      <p>Na Sulien, criamos soluções inteligentes que conectam tecnologia, inovação e resultados reais.</p>
+    </div>
+    <img src="img/homem1.png" alt="Pessoa usando tablet com gráficos" />
+  </section>
+
+  <!-- Seção 2 -->
+  <section class="section2" id="sobre-nos">
+    <div>
+      <div class="text">
+        <strong>Quem somos</strong>
+        <p>A Sulien é uma empresa de tecnologia especializada em softwares, sites e aplicativos, com foco em manter empresas e instituições sempre atualizadas na era digital.</p>
+        <p>Seu principal produto é o Leandix, aplicativo de gestão para salas e equipamentos escolares, que organiza e identifica recursos de forma simples, eficiente e inovadora.</p>
+      </div>
+    </div>
+    <img src="img/agencia.jpg" alt="Ilustração de dispositivos digitais" />
+  </section>
+
+  <!-- Seção 3 -->
+  <section class="section3" id="informacoesdoapp">
+    <div class="text">
+      <strong>O que é o Leandix</strong>
+      <p>O Leandix é um sistema de gestão escolar focado na organização e controle de recursos físicos — como salas, equipamentos, materiais e espaços compartilhados dentro da instituição.</p>
+      <p>Com uma interface moderna e intuitiva, o aplicativo permite que a escola registre, identifique e gerencie seus recursos em tempo real, garantindo mais controle, transparência e eficiência na administração.</p>
+    </div>
+    <img src="img/predios.jpeg" alt="grafico">
+  </section>
+
+  <!-- Rolagem horizontal -->
+  <section class="scroll-section">
+    <div class="horizontal-scroll">
+      <div class="image-row left">
+        <img src="img/print1.PNG" alt="">
+        <img src="img/print2.PNG" alt="">
+        <img src="img/print4.PNG" alt="">
+        <img src="img/print5.PNG" alt="">
+        <img src="img/print3.PNG" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA - Acesse o App -->
+  <section class="cta-banner" id="acessoapp">
+    <h2>contate-nos <span>agora mesmo!</span></h2>
+    <a onclick="formulario()" class="cta-button" style="cursor: pointer;">CONTATE-NOS</a>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="footer" id="faleconosco">
+
+
+<div class="social-container">
+  
+  <!-- Instagram -->
+  <a class="social-button instagram" 
+     href="https://www.instagram.com/centralsulien?igsh=dWdobXQxajJ2b3Jq" 
+     target="_blank" 
+     rel="noopener noreferrer">
+    <div class="icon">
+      <img src="icons/instagram.svg" alt="Instagram">
+    </div>
+    <span class="info">centralsulien</span>
+  </a>
+
+  <!-- WhatsApp -->
+  <a class="social-button whatsapp"
+     href="https://wa.me/5531986203722"
+     target="_blank"
+     rel="noopener noreferrer">
+    <div class="icon">
+      <img src="icons/whatsapp.svg" alt="WhatsApp">
+    </div>
+    <span class="info">(31) 9 8620-3722</span>
+  </a>
+
+  <!-- Facebook -->
+  <a class="social-button facebook"
+     href="https://facebook.com/SulienOficial"
+     target="_blank"
+     rel="noopener noreferrer">
+    <div class="icon">
+      <img src="icons/facebook.svg" alt="Facebook">
+    </div>
+    <span class="info">SulienOficial</span>
+  </a>
+
+  <!-- Twitter / X -->
+  <a class="social-button facebook"
+     href="https://x.com/Sulien-Oficial"
+     target="_blank"
+     rel="noopener noreferrer">
+    <div class="icon">
+      <img src="icons/twitter.svg" alt="Twitter">
+    </div>
+    <span class="info">Sulien-Oficial</span>
+  </a>
+
+  <!-- Telefone -->
+  <a class="social-button facebook"
+     href="tel:5531986203722">
+    <div class="icon">
+      <img src="icons/cecular.svg" alt="Telefone">
+    </div>
+    <span class="info">(31) 9 8620-3722</span>
+  </a>
+</div>
+
+
+    <div class="footer-line"></div>
+
+    <p>
+      Sulien © 2025 |
+      <a href="PoliticaDePrivacidade.html#Dados">Política de Segurança da Informação</a> |
+      <a href="PoliticaDePrivacidade.html#Etica">Código de Ética</a>
+    </p>
+    <p>
+      <a href="PoliticaDePrivacidade.html">Política de Privacidade</a> |
+      <a href="PoliticaDePrivacidade.html">LGPD</a> |
+      <a href="PoliticaDePrivacidade.html#Corrupcao">Política Anticorrupção</a>
+    </p>
+  </footer>
+
+  <!-- Notificação -->
+  <div id="notificacao" class="notificacao">Bem-vindo(a) à Sulien!</div>
+
+<style>
+    /* Rolagem suave */
+    html 
+    {
+      scroll-behavior: smooth;
+    }
+</style>
+
+<script> // salva o sw logo na index para o (pwa e todas aas paginas)
+    if ("serviceWorker" in navigator) 
+    {
+    navigator.serviceWorker.register("sw.js")
+        .then(() => console.log("✅ Service Worker registrado"))
+        .catch(err => console.error("❌ Erro no SW", err));
+    }
+</script>
+
+</body>
+</html>

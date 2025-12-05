@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">Configurações</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="assets/global.css">
+  <link rel="stylesheet" href="configura.css" />
+  <link rel="stylesheet" href="../assets/animations.css">
+
+  <script src="../assets/api.js"></script>
+  <script src="../assets/toast.js" defer></script>
+  <script src="configura.js" defer></script>
+  <script src="profile-photo.js" defer></script>
+</head>
+
+<body>
+  <aside class="sidebar" aria-label="mainNav">
+    <div class="brand">
+      <img class="brand-logo" src="img/logo2.svg" alt="Logo" />
+    </div>
+
+    <nav class="nav">
+      <button class="nav-btn" onclick="window.location.href='home.html'">
+        <i class="fa-solid fa-house"></i><span data-i18n="menu_home">Home</span>
+      </button>
+
+      <button class="nav-btn" onclick="window.location.href='usuario.html'">
+        <i class="fa-solid fa-user"></i><span data-i18n="menu_user">Usuário</span>
+      </button>
+
+      <button class="nav-btn" onclick="window.location.href='reservas.html'">
+        <i class="fa-solid fa-calendar-check"></i><span data-i18n="menu_reservations">Reservas</span>
+      </button>
+
+      <button class="nav-btn active">
+        <i class="fa-solid fa-gear"></i><span data-i18n="menu_settings">Configurações</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="logoutBtn" class="ghost" data-i18n="logout">Sair</button>
+    </div>
+  </aside>
+
+  <main class="configura">
+    <form class="card" id="configForm">
+
+      <!-- Seção de Foto de Perfil -->
+      <div class="section">
+        <h2 data-i18n="profile_photo">Foto de Perfil</h2>
+
+        <div class="profile-photo-container">
+          <div class="photo-preview">
+            <img id="profilePhotoPreview" src="img/default-avatar.png" alt="Foto de perfil">
+          </div>
+          <div class="photo-actions">
+            <label class="label" data-i18n="change_photo">Alterar foto de perfil</label>
+            <input type="file" id="profilePhotoInput" accept="image/*" style="display: none;">
+            <button type="button" class="btn-upload" onclick="document.getElementById('profilePhotoInput').click()"
+              data-i18n="select_photo">
+              <i class="fa-solid fa-camera"></i> Selecionar foto
+            </button>
+            <button type="button" class="btn-remove" id="removePhotoBtn" data-i18n="remove_photo">
+              <i class="fa-solid fa-trash"></i> Remover foto
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2 data-i18n="notifications">Notificações</h2>
+
+        <label class="label" data-i18n="receive_notifications">Receber notificações</label>
+        <select id="notificacoes" class="control">
+          <option value="sim" data-i18n="yes">Sim</option>
+          <option value="nao" data-i18n="no">Não</option>
+        </select>
+      </div>
+
+      <div class="section">
+        <h2 data-i18n="security">Segurança</h2>
+
+        <label class="label" data-i18n="current_password">Senha atual</label>
+        <input type="password" id="currentPassword" class="control" minlength="6">
+
+        <label class="label" data-i18n="new_password">Nova senha</label>
+        <input type="password" id="newPassword" class="control" minlength="6">
+
+        <label class="label" data-i18n="confirm_password">Confirmar senha</label>
+        <input type="password" id="confirmPassword" class="control" minlength="6">
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn" id="changePasswordBtn" data-i18n="change_password">Alterar senha</button>
+      </div><br>
+
+      <div class="section">
+        <h2 data-i18n="preferences">Preferências</h2>
+
+        <label class="label" data-i18n="theme">Tema do sistema</label>
+        <select id="tema" class="control" onchange="setTemaNovo(this.value)">
+          <option value="Claro">Claro</option>
+          <option value="Escuro">Escuro</option>
+        </select>
+
+        <label class="label" data-i18n="language">Idioma</label>
+        <select id="idioma" class="control" onchange="setIdiomaNovo(this.value)">
+          <option value="pt">Português</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+
+    </form>
+  </main>
+
+  <script>
+    // Proteção de rota
+    requireAuth();
+
+    // Logout handler
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+
+    // Password change handler
+    document.getElementById('changePasswordBtn')?.addEventListener('click', async function () {
+      const current = document.getElementById('currentPassword').value;
+      const newPass = document.getElementById('newPassword').value;
+      const confirm = document.getElementById('confirmPassword').value;
+
+      if (!current || !newPass || !confirm) {
+        showToast('Preencha todos os campos de senha', 'error');
+        return;
+      }
+
+      if (newPass.length < 6) {
+        showToast('Nova senha deve ter pelo menos 6 caracteres', 'error');
+        return;
+      }
+
+      if (newPass !== confirm) {
+        showToast('As senhas não coincidem', 'error');
+        return;
+      }
+
+      try {
+        // TODO: Implementar endpoint de mudança de senha
+        showToast('Funcionalidade em desenvolvimento', 'info');
+      } catch (error) {
+        showToast('Erro ao alterar senha', 'error');
+      }
+    });
+  </script>
+</body>
+
+</html>

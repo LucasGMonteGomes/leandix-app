@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instalar Lendix</title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <meta charset="UTF-8"> <!-- Define a codificação do texto como UTF-8 (suporta acentos, emojis e caracteres especiais) -->
+    <meta name="theme-color" content="#2b2b2b"> <!-- Cor da barra do navegador no celular e do tema quando o PWA é instalado -->
+    <meta name="theme-color" content="#ffffff"> <!-- detectar se o manifest e o pwa esta certo -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ajusta a página para ser responsiva em celulares (usa largura real da tela e zoom inicial 100%) -->
+
+
+    <!-- Ícone do app -->
+    <link rel="icon" href="assets/icon-192x192.png" type="image/png">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- script interações -->
+    <script src="interacao.js"></script>
+
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(145deg, #2b2b2b, #1a1a1a);
+      color: #fff;
+      font-family: "Poppins", Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .container {
+      max-width: 420px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.3);
+      backdrop-filter: blur(15px);
+      animation: fadeIn 0.8s ease;
+    }
+
+    .logo {
+      width: 190px;
+      margin-bottom: 20px;
+      animation: logoFloat 3s infinite ease-in-out;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 16px;
+      opacity: 0.85;
+      margin-bottom: 25px;
+    }
+
+    #install-btn {
+      padding: 15px 25px;
+      background: #0f9d58;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: none;
+      width: 100%;
+      font-weight: bold;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+
+    #install-btn:hover {
+      background: #0c8d4f;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes logoFloat {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(15, 157, 88, 0.5); }
+      100% { box-shadow: 0 0 0 20px rgba(15, 157, 88, 0); }
+    }
+
+    .manual {
+      margin-top: 20px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <img src="img2/logo.svg" class="logo" alt="Lendix Logo">
+
+  <h1>Instale o Lendix</h1>
+  <p>Toque no botão abaixo para instalar o aplicativo e usar mesmo sem internet.</p>
+
+  <button id="install-btn" onclick="instalarPWA()">📥 Instalar agora</button>
+
+  <p class="manual">
+    Se o botão não aparecer,<br>
+    toque em "Adicionar à tela inicial" no navegador.
+  </p>
+</div>
+
+<script>
+  let deferredPrompt = null;
+
+  // Detecta evento de instalação disponível
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById("install-btn").style.display = "block";
+  });
+
+  // Quando o usuário clicar para instalar
+  async function instalarPWA() {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const escolha = await deferredPrompt.userChoice;
+
+    if (escolha.outcome === "accepted") {
+      console.log("PWA instalado!");
+      // Redireciona automaticamente para o app depois de instalar
+      setTimeout(() => {
+        window.location.href = "animacao4.html";
+      }, 500);
+    }
+
+    deferredPrompt = null;
+  }
+
+  // Registrar o service worker do app
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("SW do Lendix registrado"));
+  }
+</script>
+
+<button id="botão-volta" onclick="botaoVoltaIndex()"></button>
+</body>
+</html>

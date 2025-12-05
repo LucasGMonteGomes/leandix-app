@@ -1,0 +1,95 @@
+/* Animations & Transitions */
+
+:root {
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Fade In */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn var(--transition-normal) forwards;
+}
+
+/* Slide In */
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in {
+    animation: slideInRight var(--transition-normal) forwards;
+}
+
+/* Pulse */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse {
+    animation: pulse var(--transition-fast);
+}
+
+/* Shake (Error) */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Spin (Loading) */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Page Transition */
+.page-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.page-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Button Hover Effect */
+.btn-animate {
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-animate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-animate:active {
+    transform: translateY(0);
+}
+
+/* Card Hover */
+.card-hover {
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}

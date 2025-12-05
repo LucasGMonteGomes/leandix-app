@@ -1,0 +1,497 @@
+/* -------------------------------------------------------------
+     Updated single-file CSS: modern, clean, fully responsive
+     - marks today's date on both calendars
+     - mini calendar syncs with main calendar and highlights selected day
+  --------------------------------------------------------------*/
+:root {
+  --bg: #f3f6fb;
+  --primary: #246bff;
+  /* slightly deeper */
+  --accent: #8f6bff;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #0f1724;
+  --glass: rgba(255, 255, 255, 0.75);
+  --radius: 14px;
+  --shadow: 0 8px 28px rgba(15, 23, 36, 0.07);
+  --radius-sm: 10px;
+  --success: #28a745;
+  --warn: #ffb703;
+  --danger: #ff6b6b;
+}
+
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0
+}
+
+html,
+body {
+  height: 100%
+}
+
+body {
+  font-family: 'Poppins', system-ui, Segoe UI, Roboto, Arial;
+  background: linear-gradient(180deg, var(--bg), #ffffff);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  min-height: 100vh
+}
+
+/* Layout */
+.app {
+  display: flex;
+  flex: 1;
+  min-height: 100vh
+}
+
+.sidebar {
+  width: 96px;
+  background-color: #55A3FF;
+  height: 100vh;
+  padding: 18px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 8px 0 30px rgba(36, 107, 255, 0.08);
+  position: sticky;
+  top: 0
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px
+}
+
+.brand-logo {
+  width: 210px;
+  height: 100px
+}
+
+.brand-name {
+  font-weight: 700;
+  color: #fff;
+  font-size: 12px;
+  opacity: 0.95
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px
+}
+
+.nav-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: none;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 12px;
+  opacity: 0.95
+}
+
+.nav-btn i {
+  font-size: 18px
+}
+
+.nav-btn span {
+  display: block;
+  font-size: 11px
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.06)
+}
+
+.nav-btn.active {
+  background: rgba(0, 0, 0, 0.09)
+}
+
+.sidebar-footer {
+  display: flex;
+  justify-content: center
+}
+
+.ghost {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  background: transparent
+}
+
+.page-title {
+  font-size: 20px;
+  color: var(--text);
+  font-weight: 600
+}
+
+.user-short {
+  display: flex;
+  align-items: center;
+  gap: 10px
+}
+
+.user-short img {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover
+}
+
+.content {
+  display: flex;
+  gap: 22px;
+  padding: 0 22px 28px
+}
+
+.left-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 980px
+}
+
+.right-col {
+  width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.configura {
+  margin-left: 96px;
+  padding: 28px;
+  min-height: 100vh;
+  background: #eaf4ff;
+  width: calc(100% - 96px);
+  overflow-x: hidden;
+}
+
+/* CARD */
+.card {
+  width: 100%;
+  max-width: 90%;
+  background: transparent;
+  padding: 10px 6px;
+}
+
+/* SECTIONS */
+.section {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 6px 18px rgba(15, 40, 80, 0.03);
+}
+
+.section h2 {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+/* PROFILE PHOTO SECTION */
+.profile-photo-container {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 12px;
+}
+
+.photo-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #55A3FF;
+  box-shadow: 0 4px 12px rgba(85, 163, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-actions {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-upload,
+.btn-remove {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  max-width: 200px;
+}
+
+.btn-upload {
+  background: linear-gradient(180deg, #69b6ff, #2f89ff);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(47, 137, 255, 0.18);
+}
+
+.btn-upload:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(47, 137, 255, 0.25);
+}
+
+.btn-remove {
+  background: linear-gradient(180deg, #ff6b6b, #ee5a52);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.18);
+}
+
+.btn-remove:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(255, 107, 107, 0.25);
+}
+
+/* LABELS / INPUTS */
+.label {
+  display: block;
+  font-size: 12px;
+  color: #222;
+  margin: 8px 0 6px;
+}
+
+.control {
+  width: 100%;
+  height: 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 6px 10px;
+  font-size: 13px;
+  background: #fff;
+  outline: none;
+  transition: box-shadow .12s, border-color .12s;
+}
+
+.control:focus {
+  border-color: rgba(85, 163, 255, 0.8);
+  box-shadow: 0 0 0 6px rgba(85, 163, 255, 0.06);
+}
+
+select.control {
+  width: 220px;
+}
+
+/* Botão */
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.btn {
+  background: linear-gradient(180deg, #69b6ff, #2f89ff);
+  color: #fff;
+  padding: 8px 22px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(47, 137, 255, 0.18);
+}
+
+/* Mensagem */
+.msg {
+  margin-top: 12px;
+  min-height: 22px;
+  text-align: center;
+  font-size: 13px;
+  display: none;
+}
+
+.msg.show {
+  display: block;
+}
+
+.msg.success {
+  color: #11693a;
+  background: #e6fbef;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(17, 105, 58, 0.06);
+}
+
+.msg.error {
+  color: #7a1414;
+  background: #fff0f0;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(122, 20, 20, 0.06);
+}
+
+/* ---- RESPONSIVO ---- */
+@media (max-width: 920px) {
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 18px;
+  }
+
+  .configura {
+    margin-left: 0;
+    margin-top: 100px;
+    width: 100%;
+  }
+
+  .brand,
+  .brand-logo {
+    display: none;
+  }
+
+  .nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .card {
+    width: 500px;
+    max-width: 94%;
+    background: transparent;
+    padding: 10px 6px;
+  }
+
+  /* Responsivo para foto de perfil */
+  .profile-photo-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .photo-preview {
+    width: 100px;
+    height: 100px;
+  }
+
+  .photo-actions {
+    width: 100%;
+    align-items: center;
+  }
+
+  .btn-upload,
+  .btn-remove {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* ============================
+   TEMA ESCURO
+============================ */
+.dark-theme {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+.dark-theme .sidebar {
+  background: #111 !important;
+  box-shadow: none;
+}
+
+.dark-theme .nav-btn,
+.dark-theme .ghost {
+  color: #fff !important;
+}
+
+.dark-theme .nav-btn.active {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-theme .section {
+  background: #111 !important;
+  border-color: #222 !important;
+  color: #fff !important;
+}
+
+.dark-theme .section h2 {
+  color: #fff !important;
+}
+
+.dark-theme .label {
+  color: #ddd !important;
+}
+
+.dark-theme .control {
+  background: #222 !important;
+  color: #fff !important;
+  border-color: #444 !important;
+}
+
+.dark-theme .btn {
+  background: linear-gradient(180deg, #333, #000) !important;
+  color: #fff !important;
+}
+
+.dark-theme select option {
+  background: #222 !important;
+  color: #fff !important;
+}
+
+.dark-body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #444;
+  color: white;
+}
+
+/* Tema escuro para foto de perfil */
+.dark-theme .photo-preview {
+  border-color: #2f89ff;
+}
+
+.dark-theme .btn-upload {
+  background: linear-gradient(180deg, #2f89ff, #1a5acc);
+}
+
+.dark-theme .btn-remove {
+  background: linear-gradient(180deg, #ee5a52, #cc3333);
+}

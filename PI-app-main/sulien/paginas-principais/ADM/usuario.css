@@ -1,0 +1,866 @@
+
+  /* -------------------------------------------------------------
+     Updated single-file CSS: modern, clean, fully responsive
+     - marks today's date on both calendars
+     - mini calendar syncs with main calendar and highlights selected day
+  --------------------------------------------------------------*/
+  :root
+  {
+    --bg:#f3f6fb;
+    --primary:#246bff; /* slightly deeper */
+    --accent:#8f6bff;
+    --card:#ffffff;
+    --muted:#6b7280;
+    --text:#0f1724;
+    --glass: rgba(255,255,255,0.75);
+    --radius:14px;
+    --shadow: 0 8px 28px rgba(15,23,36,0.07);
+    --radius-sm:10px;
+    --success:#28a745;
+    --warn:#ffb703;
+    --danger:#ff6b6b;
+  }
+
+  /* Reset */
+  *
+  {
+    box-sizing:border-box;
+    margin:0;padding:0
+  }
+  html,body
+  {
+    height:100%
+  }
+  body
+  {
+    font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; 
+    background:linear-gradient(180deg,var(--bg),#ffffff); 
+    color:var(--text); 
+    -webkit-font-smoothing:antialiased; 
+    display:flex; min-height:100vh
+  }
+
+  /* Layout */
+  .app
+  {
+    display:flex;
+    flex:1;
+    min-height:100vh
+  }
+  .sidebar
+  {
+    width:96px;
+    background-color: #55A3FF;
+    height:100vh;
+    padding:18px 10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-shadow: 8px 0 30px rgba(36,107,255,0.08);
+    position:sticky;top:0 
+  }
+  .brand
+  {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px
+  }
+  .brand-logo
+  {
+    width:210px;
+    height:100px
+  }
+  .brand-name
+  {
+    font-weight:700;
+    color:#fff;
+    font-size:12px;
+    opacity:0.95
+  }
+  .nav
+  {
+    display:flex;
+    flex-direction:column;
+    gap: 25px;
+    margin-top:20px
+  }
+  .nav-btn
+  {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    border:none;
+    background:none;
+    color:#ffffff;
+    padding:10px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:12px;
+    opacity:0.95
+  }
+  .nav-btn i
+  {
+    font-size:18px
+  }
+  .nav-btn span
+  {
+    display:block;
+    font-size:11px
+  }
+  .nav-btn:hover
+  {
+    background:rgba(255,255,255,0.06)
+  }
+  .nav-btn.active
+  {
+    background:rgba(0,0,0,0.09)
+  }
+  .sidebar-footer
+  {
+    display:flex;
+    justify-content:center
+  }
+  .ghost
+  {
+    background:none;
+    border:none;
+    color:#fff;
+    padding:8px 10px;
+    border-radius:8px;
+    cursor:pointer
+  }
+
+  .main
+  {
+    flex:1;
+    display:flex;
+    flex-direction:column
+  }
+  .topbar
+  {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 22px;
+    background:transparent
+  }
+  .page-title
+  {
+    font-size:20px;
+    color:var(--text);
+    font-weight:600
+  }
+  .user-short
+  {
+    display:flex;
+    align-items:center;
+    gap:10px
+  }
+  .user-short img
+  {
+    width:44px;
+    height:44px;
+    border-radius:10px;
+    object-fit:cover
+  }
+
+  .content
+  {
+    display:flex;
+    gap:22px;
+    padding:0 22px 28px
+  }
+  .left-col
+  {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    max-width:980px
+  }
+  .right-col
+  {
+    width:340px;
+    display:flex;
+    flex-direction:column;
+    gap:18px
+  }
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.main-content {
+  margin-left: 96px;              
+  padding: 20px;
+  min-height: 100vh;
+  background: #eaf4ff;
+  color: #000;
+  width: calc(100% - 96px);      
+  overflow-x: hidden;             
+}
+
+/* ================= MAIN CONTENT ================= */
+.main-content {
+  margin-left: 96px;
+  padding: 20px;
+  min-height: 100vh;
+  background: #eaf4ff;
+  color: #000;
+  width: calc(100% - 96px);
+  overflow-x: hidden;
+}
+
+/* ================= USUÁRIO ================= */
+.user-card {
+  background-color: #5098f2;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  color: white;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+.user-card h2 {
+  font-size: 22px;
+}
+
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.user-photo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.user-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px 20px;
+  font-size: 18px;
+  word-break: break-word;
+}
+
+/* ================= HISTÓRICO ================= */
+.historico {
+  background-color: #5098f2;
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px 20px;
+  color: white;
+  overflow: hidden;
+}
+
+.historico h3 {
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.historico-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 13px;
+  align-items: center;
+  gap: 10px;
+  word-break: break-word;
+}
+
+.historico-item:nth-child(odd) {
+  background-color: #123a88;
+}
+.historico-item:nth-child(even) {
+  background-color: #5c7af0;
+}
+
+/* ================= BOTÃO ADICIONAR USUÁRIO ================= */
+.addusuario,
+.addequipamento
+{
+  width: 300px;
+  height: 50px;
+  border-radius: 15px;
+  background-color: #5098f2;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s;
+}
+.addusuario:hover {
+  background-color: #4073d9;
+}
+
+.textadd h3 {
+  text-align: center;
+}
+
+/* ================= MODAL ================= */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  width: 400px;
+  max-width: 90%;
+  max-height: 90vh; /* Limita altura máxima */
+  overflow-y: auto; /* Adiciona scroll vertical */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: 500;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+}
+
+/* ================= BOTÕES FORMULARIO ================= */
+.btn-confirmar {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+}
+.btn-confirmar:hover {
+  background-color: #1f5ad6;
+}
+
+.btn-cancelar {
+  background-color: #ccc;
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  font-weight: 600;
+  margin-top: 13px;
+}
+.btn-cancelar:hover {
+  background-color: #b3b3b3;
+}
+
+/* ================= RESPONSIVO ================= */
+@media (max-width: 920px) {
+
+
+  /* Main content */
+  .main-content {
+    margin-left: 0;
+    margin-top: 96px;
+    margin-bottom: 80px;
+    width: 100%;
+    padding: 20px 10px;
+  }
+
+  /* User card */
+  .user-card {
+    height: auto;
+    padding: 15px;
+  }
+
+  .user-info {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    font-size: 14px;
+  }
+
+  /* Histórico */
+  .historico-item {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 12px;
+  }
+
+  /* Botões */
+  .addusuario,
+  .btn-confirmar,
+  .btn-cancelar {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px 0;
+  }
+}
+
+/* --------------------------
+   Responsividade
+---------------------------*/
+@media (max-width: 1200px) {
+   main { 
+    width: 80%; 
+  }
+}
+@media (max-width: 900px) {
+  .app { 
+    flex-direction: column; 
+    padding-bottom: 80px; 
+  }
+  .brand, 
+  .brand-logo {
+    display: none;
+  }
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 18px;
+    border-radius: 0;
+  }
+  .nav{ 
+    flex-direction: row; 
+    width: 100%; 
+    justify-content: space-around; 
+    margin-top: 0; 
+  }
+  main { 
+    margin-top: 96px;
+    width: 90%; 
+  }
+  .card { 
+    padding: 12px; 
+  }
+  .equip-list { 
+    grid-template-columns: 1fr; 
+    gap: 12px; 
+  }
+}
+
+
+@media (max-width: 540px) {
+  .equip-item img { 
+    width: 50px; 
+    height: 50px; 
+  }
+  .calendar { 
+    gap: 5px; 
+  }
+}
+
+
+@media (max-width: 420px) {
+  .equip-item { 
+    flex-direction: column; 
+    text-align: center; 
+  }
+  .equip-actions { 
+    justify-content: center; 
+  }
+  .calendar .day { 
+    padding: 6px; 
+    font-size: 12px; 
+  }
+}
+
+
+
+/* ==============================
+   FORMULÁRIO DE CADASTRO - PREMIUM
+============================== */
+
+#formCadastro{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Labels */
+#formCadastro label{
+  color:#cfe6ff;
+  font-size:0.9rem;
+  font-weight:600;
+  margin-top:6px;
+}
+
+/* Inputs + Select */
+#formCadastro input,
+#formCadastro select{
+  width:100%;
+  background:#0d1736;
+  color:#fff;
+  border:1px solid rgba(30,144,255,.35);
+  border-radius:12px;
+  padding:14px;
+  font-size:15px;
+  outline:none;
+  transition:.25s ease;
+}
+
+/* Placeholder */
+#formCadastro input::placeholder,
+#formCadastro select{
+  color:#9fb6da;
+}
+
+/* Hover */
+#formCadastro input:hover,
+#formCadastro select:hover{
+  border-color:rgba(30,144,255,.8);
+}
+
+/* Focus */
+#formCadastro input:focus,
+#formCadastro select:focus{
+  border-color:#1e90ff;
+  box-shadow:0 0 0 2px rgba(30,144,255,.35);
+}
+
+/* Remove arrows do input number */
+#formCadastro input[type=number]::-webkit-inner-spin-button,
+#formCadastro input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance:none;
+}
+#formCadastro input[type=number]{
+  -moz-appearance:textfield;
+}
+
+/* Select */
+#formCadastro select{
+  appearance:none;
+  cursor:pointer;
+}
+
+/* Wrapper da seta */
+#formCadastro .select-wrapper{
+  position:relative;
+  width:100%;
+}
+
+/* Seta custom */
+#formCadastro .select-wrapper::after{
+  content:"▾";
+  position:absolute;
+  top:50%;
+  right:15px;
+  transform:translateY(-50%);
+  pointer-events:none;
+  color:#1e90ff;
+  font-size:18px;
+}
+
+/* Botões */
+#formCadastro button{
+  margin-top:10px;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s ease;
+}
+
+/* Confirmar */
+.btn-confirmar{
+  background:linear-gradient(135deg,#1e90ff,#00c3ff);
+  color:#fff;
+  box-shadow:0 8px 22px rgba(30,144,255,.45);
+}
+
+.btn-confirmar:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(30,144,255,.6);
+}
+
+/* Cancelar */
+.btn-cancelar{
+  background:transparent;
+  color:#ff7b7b;
+  border:1px solid rgba(255,123,123,.7);
+}
+
+.btn-cancelar:hover{
+  background:rgba(255,123,123,.1);
+}
+
+/* Erro */
+.invalid{
+  border-color:#ff5e5e!important;
+  box-shadow:0 0 0 2px rgba(255,94,94,.25)!important;
+}
+
+.field-error{
+  color:#ffb4b4;
+  font-size:12px;
+  margin-top:-6px;
+}
+
+/* Modal content */
+.modal-content{
+  background:linear-gradient(135deg,#070f26,#050b1f);
+  padding:28px;
+  border-radius:22px;
+  max-width:420px;
+  width:100%;
+  box-shadow:0 0 40px rgba(0,0,0,.55);
+}
+
+/* Mobile responsivo */
+@media (max-width:480px){
+  .modal-content{
+    padding:22px;
+  }
+
+  #formCadastro input,
+  #formCadastro select{
+    padding:12px;
+    font-size:14px;
+  }
+}
+
+
+/* BOTÕES LADO A LADO */
+.add-actions{
+  display:flex;
+  gap:14px;
+}
+
+.addusuario,
+.addequipamento{
+  flex:1;
+  padding:16px;
+  background: linear-gradient(145deg,#10233f,#0b1c33);
+  border-radius:10px;
+  cursor:pointer;
+  transition:.25s;
+  text-align:center;
+  border:1px solid #1e3a63;
+}
+
+.addusuario:hover,
+.addequipamento:hover{
+  transform:translateY(-3px);
+  background:#123166;
+}
+
+/* Preview da imagem do equipamento */
+#previewEquip{
+  border: 1px solid #1f3c67;
+  background:#071a31;
+}
+
+
+/* ==============================
+   FORMULÁRIOS DE CADASTRO - PREMIUM
+   Usuário (#formCadastro)
+   Equipamento (#formEquipamento)
+============================== */
+
+#formCadastro,
+#formEquipamento{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+/* Labels */
+#formCadastro label,
+#formEquipamento label{
+  color:#cfe6ff;
+  font-size:0.9rem;
+  font-weight:600;
+  margin-top:6px;
+}
+
+/* Inputs + Select */
+#formCadastro input,
+#formCadastro select,
+#formEquipamento input,
+#formEquipamento select{
+  width:100%;
+  background:#0d1736;
+  color:#fff;
+  border:1px solid rgba(30,144,255,.35);
+  border-radius:12px;
+  padding:14px;
+  font-size:15px;
+  outline:none;
+  transition:.25s ease;
+}
+
+/* Placeholder */
+#formCadastro input::placeholder,
+#formEquipamento input::placeholder,
+#formCadastro select,
+#formEquipamento select{
+  color:#9fb6da;
+}
+
+/* Hover */
+#formCadastro input:hover,
+#formCadastro select:hover,
+#formEquipamento input:hover,
+#formEquipamento select:hover{
+  border-color:rgba(30,144,255,.8);
+}
+
+/* Focus */
+#formCadastro input:focus,
+#formCadastro select:focus,
+#formEquipamento input:focus,
+#formEquipamento select:focus{
+  border-color:#1e90ff;
+  box-shadow:0 0 0 2px rgba(30,144,255,.35);
+}
+
+/* Remove arrows do input number */
+#formCadastro input[type=number]::-webkit-inner-spin-button,
+#formCadastro input[type=number]::-webkit-outer-spin-button,
+#formEquipamento input[type=number]::-webkit-inner-spin-button,
+#formEquipamento input[type=number]::-webkit-outer-spin-button{
+  -webkit-appearance:none;
+}
+#formCadastro input[type=number],
+#formEquipamento input[type=number]{
+  -moz-appearance:textfield;
+}
+
+/* Select */
+#formCadastro select,
+#formEquipamento select{
+  appearance:none;
+  cursor:pointer;
+}
+
+/* Wrapper da seta */
+.select-wrapper{
+  position:relative;
+  width:100%;
+}
+
+/* Seta custom */
+.select-wrapper::after{
+  content:"▾";
+  position:absolute;
+  top:50%;
+  right:15px;
+  transform:translateY(-50%);
+  pointer-events:none;
+  color:#1e90ff;
+  font-size:18px;
+}
+
+/* Botões */
+#formCadastro button,
+#formEquipamento button{
+  margin-top:10px;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  transition:.25s ease;
+}
+
+/* Confirmar */
+.btn-confirmar{
+  background:linear-gradient(135deg,#1e90ff,#00c3ff);
+  color:#fff;
+  box-shadow:0 8px 22px rgba(30,144,255,.45);
+}
+
+.btn-confirmar:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 30px rgba(30,144,255,.6);
+}
+
+/* Cancelar */
+.btn-cancelar{
+  background:transparent;
+  color:#ff7b7b;
+  border:1px solid rgba(255,123,123,.7);
+}
+
+.btn-cancelar:hover{
+  background:rgba(255,123,123,.1);
+}
+
+/* Erro */
+.invalid{
+  border-color:#ff5e5e!important;
+  box-shadow:0 0 0 2px rgba(255,94,94,.25)!important;
+}
+
+.field-error{
+  color:#ffb4b4;
+  font-size:12px;
+  margin-top:-6px;
+}
+
+/* Modal content */
+.modal-content{
+  background:linear-gradient(135deg,#070f26,#050b1f);
+  padding:28px;
+  border-radius:22px;
+  max-width:420px;
+  width:100%;
+  box-shadow:0 0 40px rgba(0,0,0,.55);
+}
+
+/* Mobile responsivo */
+@media (max-width:480px){
+  .modal-content{
+    padding:22px;
+  }
+
+  #formCadastro input,
+  #formCadastro select,
+  #formEquipamento input,
+  #formEquipamento select{
+    padding:12px;
+    font-size:14px;
+  }
+}
+

@@ -1,0 +1,196 @@
+/* ===== CORES DA SULIEN ===== */
+:root {
+  --primary: #0F0F5A;
+  --secondary: #1a0f7a;
+  --accent: #ea7f0c;
+  --text-light: #ccc;
+  --white: #ffffff;
+  --bg-dark: #000;
+}
+
+/* ===== RESET ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, var(--bg-dark) 0%, var(--primary) 100%);
+  color: var(--white);
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== TOPO ===== */
+.top-bar {
+  background: var(--white);
+  text-align: center;
+  width: 100%;
+}
+
+.logo {
+  width: 450px;
+  max-width: 100%;
+}
+
+/* ===== CONTAINER DO FORMULÁRIO ===== */
+.form-section {
+  display: flex;
+  justify-content: center;
+  padding: 60px 20px;
+  width: 100%;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 650px;
+  background: #0d0d0dce;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #00000070;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.form-container h2 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form-container h2 span {
+  color: var(--accent);
+}
+
+.subtext {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 30px;
+}
+
+/* ===== CAMPOS ===== */
+.input-box {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-box label {
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--accent);
+}
+
+input,
+select,
+textarea {
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: #111;
+  color: var(--white);
+  font-size: 16px;
+  transition: 0.3s;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  transform: scale(1.02);
+}
+
+/* ===== BOTÃO ===== */
+.send-btn {
+  width: 100%;
+  padding: 15px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.send-btn:hover {
+  background: #ff9a28;
+  transform: scale(1.04);
+}
+
+/* ===== ANIMAÇÃO ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 480px) {
+  .form-container {
+    padding: 25px;
+    max-width: 100%;
+  }
+
+  .logo {
+    width: 250px;
+  }
+
+  .top-bar,
+  .form-section {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .form-container {
+    padding: 20px;
+  }
+}
+
+/* Oculto */
+.empresa-hidden {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height .5s ease, opacity .4s ease;
+}
+
+.empresa-show {
+  max-height: 800px;
+  opacity: 1;
+}
+
+.empresa-item {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+
+.empresa-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.empresa-item:nth-child(1).show { transition-delay: .1s; }
+.empresa-item:nth-child(2).show { transition-delay: .2s; }
+.empresa-item:nth-child(3).show { transition-delay: .3s; }
+.empresa-item:nth-child(4).show { transition-delay: .4s; }
+
+/* Erros */
+.input-error {
+  border-color: #e53935 !important;
+  background: #866767;
+}
+
+.error-message {
+  font-size: 12px;
+  color: #e53935;
+  margin-top: 5px;
+  display: block;
+}

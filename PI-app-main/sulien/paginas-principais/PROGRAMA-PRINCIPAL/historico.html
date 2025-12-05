@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Reservas - Sulien</title>
+    <link rel="stylesheet" href="reservas.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Histórico de Reservas</h1>
+            <div class="filter-buttons">
+                <button id="filterAll" class="filter-btn active">Todas</button>
+                <button id="filterActive" class="filter-btn">Ativas</button>
+                <button id="filterFuture" class="filter-btn">Futuras</button>
+                <button id="filterPast" class="filter-btn">Passadas</button>
+                <button id="filterCancelled" class="filter-btn">Canceladas</button>
+            </div>
+        </header>
+
+        <div id="reservationsList" class="reservations-list">
+            <!-- Reservas serão carregadas aqui -->
+        </div>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <p>Você não tem reservas no momento.</p>
+        </div>
+
+        <!-- Modal de confirmação de cancelamento -->
+        <div id="cancelModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h2>Cancelar Reserva</h2>
+                <p>Tem certeza que deseja cancelar esta reserva?</p>
+                <!DOCTYPE html>
+                <html lang="pt-BR">
+
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Histórico de Reservas - Sulien</title>
+                    <link rel="stylesheet" href="reservas.css">
+                    <link rel="stylesheet" href="home.css">
+                </head>
+
+                <body>
+                    <div class="container">
+                        <header>
+                            <h1>Histórico de Reservas</h1>
+                            <div class="filter-buttons">
+                                <button id="filterAll" class="filter-btn active">Todas</button>
+                                <button id="filterActive" class="filter-btn">Ativas</button>
+                                <button id="filterFuture" class="filter-btn">Futuras</button>
+                                <button id="filterPast" class="filter-btn">Passadas</button>
+                                <button id="filterCancelled" class="filter-btn">Canceladas</button>
+                            </div>
+                        </header>
+
+                        <div id="reservationsList" class="reservations-list">
+                            <!-- Reservas serão carregadas aqui -->
+                        </div>
+
+                        <div id="emptyState" class="empty-state" style="display: none;">
+                            <p>Você não tem reservas no momento.</p>
+                        </div>
+
+                        <!-- Modal de confirmação de cancelamento -->
+                        <div id="cancelModal" class="modal" style="display: none;">
+                            <div class="modal-content">
+                                <h2>Cancelar Reserva</h2>
+                                <p>Tem certeza que deseja cancelar esta reserva?</p>
+                                <div class="modal-actions">
+                                    <button id="confirmCancel" class="btn-danger">Sim, cancelar</button>
+                                    <button id="closeCancelModal" class="btn-secondary">Não</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- API (JWT + Fetch Wrapper) -->
+                    <script src="../assets/api.js" defer></script>
+
+                    <!-- script interações -->
+                    <script src="INTERACOES.JS" defer></script>
+                </body>
+
+                </html>

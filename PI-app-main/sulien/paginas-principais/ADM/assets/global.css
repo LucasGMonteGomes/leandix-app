@@ -1,0 +1,173 @@
+/* ============================
+    RESET GLOBAL
+============================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    height: 100vh;
+    transition: 0.2s;
+}
+
+/* ============================
+    VARIÁVEIS DO TEMA
+============================ */
+:root {
+    --bg: #f3f4f6;
+    --bg-card: #ffffff;
+    --text: #111;
+    --text-secondary: #666;
+    --border: #dcdcdc;
+    --hover: #e6e6e6;
+    --brand: #3a7bff;
+}
+
+/* AQUI ESTAVA O ERRO — AGORA FUNCIONA EM TODAS AS PÁGINAS */
+:root.dark-theme {
+    --bg: #0e0f11;
+    --bg-card: #1a1c20;
+    --text: #f5f5f5;
+    --text-secondary: #aaaaaa;
+    --border: #323232;
+    --hover: #202328;
+    --brand: #5da2ff;
+}
+
+/* ============================
+    SIDEBAR
+============================ */
+.sidebar {
+    width: 240px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brand {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.brand-logo {
+    width: 90px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nav-btn {
+    padding: 12px;
+    background: transparent;
+    border: none;
+    color: var(--text);
+    font-size: 16px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.nav-btn:hover {
+    background: var(--hover);
+}
+
+.nav-btn.active {
+    background: var(--brand);
+    color: #fff;
+}
+
+.sidebar-footer .ghost {
+    padding: 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sidebar-footer .ghost:hover {
+    background: var(--hover);
+}
+
+/* ============================
+   MAIN
+============================ */
+main {
+    flex: 1;
+    padding: 30px;
+}
+
+/* ============================
+   CARDS / FORMS
+============================ */
+.card {
+    width: 100%;
+    
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 25px;
+    border-radius: 12px;
+    margin: auto;
+}
+
+.section {
+    margin-bottom: 25px;
+}
+
+.section h2 {
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.label {
+    display: block;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.control {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    margin-bottom: 15px;
+}
+
+.control:focus {
+    border-color: var(--brand);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--brand);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}

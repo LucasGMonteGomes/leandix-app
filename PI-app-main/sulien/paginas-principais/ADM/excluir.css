@@ -1,0 +1,274 @@
+:root {
+  --bg: #f3f6fb;
+  --primary: #55A3FF;
+  --accent: #8f6bff;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #0f1724;
+  --glass: rgba(255,255,255,0.75);
+  --radius: 14px;
+  --shadow: 0 8px 28px rgba(15,23,36,0.07);
+  --radius-sm: 10px;
+  --success: #28a745;
+  --warn: #ffb703;
+  --danger: #ff6b6b;
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html, body {
+  height: 100%;
+}
+body {
+  font-family: 'Poppins', system-ui, Segoe UI, Roboto, Arial;
+  background: linear-gradient(180deg, var(--bg), #ffffff);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* --------------------------
+   Layout principal
+---------------------------*/
+  .app
+  {
+    display:flex;
+    flex:1;
+    min-height:100vh
+  }
+  .sidebar
+  { 
+    width:96px;
+    background-color: #55A3FF;
+    height:100vh;
+    padding:18px 10px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-shadow: 8px 0 30px rgba(36,107,255,0.08);
+    position:sticky;top:0 
+  }
+  .brand
+  {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px
+  }
+  .brand-logo
+  {
+    width:210px;
+    height:100px
+  }
+  .brand-name
+  {
+    font-weight:700;
+    color:#fff;
+    font-size:12px;
+    opacity:0.95
+  }
+  .nav
+  {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-top:18px
+  }
+  .nav-btn
+  {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;border:none;
+    background:none;
+    color:#ffffff;
+    padding:10px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:12px;
+    opacity:0.95;
+    margin-top: 20px; /* empurra a nav 200px para baixo */
+  }
+  .nav-btn i
+  {
+    font-size:18px
+  }
+  .nav-btn span
+  {
+    display:block;
+    font-size:11px
+  }
+  .nav-btn:hover
+  {
+    background:rgba(255,255,255,0.06)
+  }
+  .nav-btn.active
+  {
+    background:rgba(0,0,0,0.09)
+  }
+  .sidebar-footer
+  {
+    display:flex;
+    justify-content:center
+  }
+  .ghost
+  {
+    background:none;
+    border:none;
+    color:#fff;
+    padding:8px 10px;
+    border-radius:8px;
+    cursor:pointer
+  }
+/*-----------------------------main-----------------------------*/
+.main-container {
+    width: 70%;
+    height: 80%;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+}
+
+.btn-top {
+    padding: 8px 20px;
+    background: #57a4ff;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.cards-container {
+    margin-top: 40px;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 160px;
+    background: white;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.25);
+    text-align: center;
+}
+
+.card img {
+    width: 100%;
+    height: 95px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.card button {
+    margin-top: 10px;
+    padding: 7px 20px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    background: #57a4ff;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+
+/* ============================================================
+   RESPONSIVIDADE PROFISSIONAL → MOBILE FIRST
+============================================================ */
+
+/* ----- Tablets médios (até 900px) ----- */
+@media (max-width: 900px) {
+ .sidebar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 18px;
+  }
+
+   .brand, 
+  .brand-logo {
+    display: none;
+  }
+
+  .nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 0;
+  }
+
+  .nav-btn {
+    flex-direction: column;
+    padding: 6px;
+  }
+
+  .nav-btn i {
+    font-size: 22px;
+  }
+
+  .nav-btn span {
+    font-size: 10px;
+  }
+  main{
+    margin-top: 93px;
+    max-width: 600px;
+    
+  }
+ 
+}
+
+/* ----- Mobile (até 720px) ----- */
+@media (max-width: 720px) {
+  .sidebar {
+     position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0 18px;
+  }
+  .brand, 
+  .brand-logo {
+    display: none;
+  }
+
+  .nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    margin-top: 0;
+  }
+
+  .nav-btn {
+    flex-direction: column;
+    padding: 6px;
+  }
+
+  .nav-btn i {
+    font-size: 22px;
+  }
+
+  .nav-btn span {
+    font-size: 10px;
+  }
+  }

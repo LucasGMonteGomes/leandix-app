@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="menu_reservas">Reservas</title>
+
+    <!-- Fontes e ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- CSS externo -->
+    <link rel="stylesheet" href="assets/global.css">
+    <link rel="stylesheet" href="excluir.css">
+
+    <!-- Scripts de configuração -->
+    <script src="assets/config.js" defer></script>
+    <script src="INTERACOES.JS" defer></script>
+    <script src="excluir.js" defer></script>
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Navegação principal">
+        <div class="brand">
+            <img class="brand-logo" src="img/logo2.svg" alt="Leandix">
+        </div>
+        <nav class="nav" role="navigation" aria-label="Menu">
+            <button class="nav-btn" data-route="home" title="home" onclick="PGHome()">
+                <i class="fa-solid fa-house"></i>
+                <span data-i18n="menu_home">Home</span>
+            </button>
+            <button class="nav-btn" data-route="usuario" title="Usuário" onclick="PGUsuario()">
+                <i class="fa-solid fa-user"></i>
+                <span data-i18n="menu_usuario">Usuário</span>
+            </button>
+            <button class="nav-btn active" data-route="reservas" title="Reservas" onclick="PGReservas()">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span data-i18n="menu_reservas">Reservas</span>
+            </button>
+            <button class="nav-btn" data-route="configuracoes" title="Configurações" onclick="PGConfiguracoes()">
+                <i class="fa-solid fa-gear"></i>
+                <span data-i18n="menu_config">Configurações</span>
+            </button>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="ghost" aria-label="Sair" onclick="PGLogin()" data-i18n="menu_sair">Sair</button>
+        </div>
+    </aside>
+
+    <!-- Conteúdo principal -->
+    <main class="main-container">
+        <button class="btn-top" id="btnExcluirReserva" data-i18n="btn_back" onclick="PGReservas()">Voltar</button>
+        <button class="btn-top" id="btnExcluirReserva" data-i18n="btn_delete_reservation" style="margin-top: 10px;">Excluir reserva</button>
+        <div class="cards-container" id="cardsContainer">
+            <!-- Cards de reservas serão gerados aqui via JS -->
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title data-i18n="menu_user">User</title>
+
+    <!-- Fontes e ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- ======================================= SIDEBAR ======================================= -->
+    <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand">
+            <img class="brand-logo" src="img/logo2.svg" alt="Leandix">
+        </div>
+
+        <nav class="nav">
+            <button class="nav-btn" onclick="PGHomeAnimada()" data-route="home">
+                <i class="fa-solid fa-house"></i>
+                <span data-i18n="menu_home">Home</span>
+            </button>
+
+            <button class="nav-btn active" data-route="user">
+                <i class="fa-solid fa-user"></i>
+                <span data-i18n="menu_user">User</span>
+            </button>
+
+            <button class="nav-btn" onclick="window.location.href='equipamentos-adm.html'" data-route="equipamentos">
+                <i class="fa-solid fa-box"></i>
+                <span>Equipamentos</span>
+            </button>
+
+            <button class="nav-btn" onclick="PGReservas()" data-route="reservations">
+                <i class="fa-solid fa-calendar-check"></i>
+                <span data-i18n="menu_reservations">Reservations</span>
+            </button>
+
+            <button class="nav-btn" onclick="PGConfiguracoes()" data-route="settings">
+                <i class="fa-solid fa-gear"></i>
+                <span data-i18n="menu_settings">Settings</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="ghost" aria-label="Sair" onclick="PGLogin()"
+                data-i18n="menu_sair">Sair</button>
+        </div>
+    </aside>
+
+    <!-- ======================================= CONTEÚDO ======================================= -->
+    <main class="main-content">
+
+        <!-- CARD DO USUÁRIO -->
+        <div class="user-card">
+            <div class="user-header">
+                <img src="img/logo.svg" alt="User Photo" class="user-photo">
+                <h2 class="user-name">
+                    <span data-i18n="user_fullname">Full Name:</span>
+                    <span id="user-nome">Fulano de Tal</span>
+                </h2>
+            </div>
+
+            <div class="user-info">
+                <div><strong data-i18n="user_class">Class:</strong> <span id="user-turma">0070</span></div>
+                <div><strong data-i18n="user_room">Room:</strong> <span id="user-sala">7</span></div>
+                <div><strong data-i18n="user_ra">R.A:</strong> <span id="user-ra">123456</span></div>
+                <div><strong data-i18n="user_email">E-mail:</strong> <span id="user-email">joao@email.com</span></div>
+                <div><strong data-i18n="user_phone">Phone:</strong> <span id="user-numero">(11) 99999-9999</span></div>
+            </div>
+        </div>
+
+        <!-- BOTÃO DE ADICIONAR USUÁRIO -->
+        <section class="addusuario" onclick="abrirCatalogo()">
+            <div class="textadd">
+                <h3><span data-i18n="add_user">Adicionar novo usuário</span></h3>
+            </div>
+        </section>
+
+        <!-- HISTÓRICO -->
+        <section class="historico">
+            <h3><span data-i18n="user_history">History</span></h3>
+            <div id="historico-list"></div>
+        </section>
+
+    </main>
+
+    </div>
+
+    <!-- =================== MODAL DE CADASTRO =================== -->
+    <div id="catalogoAdd" class="modal hidden">
+        <div class="modal-content">
+            <h2><span data-i18n="register_user">Cadastrar Usuário</span></h2>
+            <form id="formCadastro">
+
+                <label><span data-i18n="label_fullname">Nome completo:</span></label>
+                <input type="text" id="nome" required />
+
+                <label><span>CPF:</span></label>
+                <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14" required />
+
+                <label><span data-i18n="label_email">E-mail:</span></label>
+                <input type="email" id="email" required />
+
+                <label><span data-i18n="label_ra">R.A:</span></label>
+                <input type="text" id="ra" required />
+
+                <label><span data-i18n="label_area">Área:</span></label>
+                <select id="Area" required>
+                    <option value="" disabled selected>Selecione a área...</option>
+                    <option value="USER">ALUNO</option>
+                    <option value="PROFESSOR">PROFESSOR</option>
+                    <option value="ADMIN">ADMINISTRADOR</option>
+                </select>
+
+                <!-- Campo de Turno - só aparece para PROFESSOR -->
+                <div id="turnoGroup" style="display: none;">
+                    <label><span>Turno:</span></label>
+                    <select id="turno">
+                        <option value="" disabled selected>Selecione o turno...</option>
+                        <option value="MORNING">Manhã (08:00 - 12:00)</option>
+                        <option value="AFTERNOON">Tarde (13:00 - 17:00)</option>
+                        <option value="NIGHT">Noite (18:00 - 22:00)</option>
+                    </select>
+                </div>
+
+                <label><span data-i18n="label_phone">Telefone:</span></label>
+                <input type="text" id="telefone" required />
+
+                <label><span>Foto do Usuário:</span></label>
+                <input type="file" id="foto" accept="image/*" />
+                <small style="color: #666;">Se não enviar, será usada foto padrão</small>
+
+                <button type="submit" class="btn-confirmar"><span data-i18n="btn_register">Cadastrar</span></button>
+                <button type="button" class="btn-cancelar" onclick="fecharCatalogo()"><span
+                        data-i18n="btn_cancel">Cancelar</span></button>
+            </form>
+        </div>
+    </div>
+
+    </body>
+
+</html>

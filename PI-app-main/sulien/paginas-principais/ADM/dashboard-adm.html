@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Leandix — Dashboard de Relatórios</title>
+
+    <!-- Fonte e ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Global (tema + idioma) -->
+    <link rel="stylesheet" href="assets/global.css">
+    <link rel="stylesheet" href="assets/dashboard.css">
+    <link rel="stylesheet" href="../assets/animations.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="../assets/api.js"></script>
+    <script src="../assets/toast.js" defer></script>
+    <script src="assets/dashboard.js" defer></script>
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="loader" class="loader" aria-hidden="false"
+        style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, #eef6ff, rgba(255,255,255,0.6));z-index:9999">
+        <img src="img/logo2.svg" alt="logo" class="loader-logo" style="width:96px;animation:spin 1.2s linear infinite">
+    </div>
+
+    <div id="app" class="app fade-in">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img class="brand-logo" src="img/logo2.svg" alt="Leandix">
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" onclick="window.location.href='home-adm.html'" title="Home"><i
+                        class="fa-solid fa-house"></i><span>Home</span></button>
+                <button class="nav-btn" onclick="window.location.href='usuario-adm.html'" title="Usuário"><i
+                        class="fa-solid fa-user"></i><span>Usuário</span></button>
+                <button class="nav-btn" onclick="window.location.href='reservas-adm.html'" title="Reservas"><i
+                        class="fa-solid fa-calendar-check"></i><span>Reservas</span></button>
+                <button class="nav-btn active" title="Relatórios"><i
+                        class="fa-solid fa-chart-pie"></i><span>Relatórios</span></button>
+                <button class="nav-btn" onclick="window.location.href='configura-adm.html'" title="Configurações"><i
+                        class="fa-solid fa-gear"></i><span>Configurações</span></button>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logoutBtn" class="ghost">Sair</button>
+            </div>
+        </aside>
+
+        <!-- Main content -->
+        <main class="main">
+            <header class="topbar slide-in">
+                <div class="top-left">
+                    <h1 class="page-title">Dashboard de Relatórios</h1>
+                    <p class="muted">Visão geral do sistema e estatísticas de uso</p>
+                </div>
+                <div class="top-right">
+                    <div class="date-filter">
+                        <input type="date" id="startDate" class="form-input">
+                        <span>até</span>
+                        <input type="date" id="endDate" class="form-input">
+                        <button id="filterBtn" class="btn primary btn-animate"><i class="fa-solid fa-filter"></i>
+                            Filtrar</button>
+                    </div>
+                </div>
+            </header>
+
+            <section class="content dashboard-content">
+                <!-- Stats Row -->
+                <div class="stats-grid">
+                    <div class="card stat-card card-hover slide-in" style="animation-delay: 0.1s">
+                        <div class="stat-icon primary"><i class="fa-solid fa-calendar-check"></i></div>
+                        <div class="stat-info">
+                            <h3 id="totalReservations">0</h3>
+                            <p>Total de Reservas</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card card-hover slide-in" style="animation-delay: 0.2s">
+                        <div class="stat-icon success"><i class="fa-solid fa-check-circle"></i></div>
+                        <div class="stat-info">
+                            <h3 id="activeReservations">0</h3>
+                            <p>Reservas Ativas</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card card-hover slide-in" style="animation-delay: 0.3s">
+                        <div class="stat-icon warning"><i class="fa-solid fa-ban"></i></div>
+                        <div class="stat-info">
+                            <h3 id="cancelledReservations">0</h3>
+                            <p>Canceladas</p>
+                        </div>
+                    </div>
+                    <div class="card stat-card card-hover slide-in" style="animation-delay: 0.4s">
+                        <div class="stat-icon info"><i class="fa-solid fa-percent"></i></div>
+                        <div class="stat-info">
+                            <h3 id="occupancyRate">0%</h3>
+                            <p>Taxa de Ocupação</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="charts-grid">
+                    <div class="card chart-card card-hover slide-in" style="animation-delay: 0.5s">
+                        <h3>Reservas por Turno</h3>
+                        <div class="chart-container">
+                            <canvas id="shiftChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="card chart-card card-hover slide-in" style="animation-delay: 0.6s">
+                        <h3>Status das Reservas</h3>
+                        <div class="chart-container">
+                            <canvas id="statusChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Proteção de rota
+        requireAuth();
+
+        // Logout handler
+        document.getElementById('logoutBtn').addEventListener('click', logout);
+    </script>
+</body>
+
+</html>

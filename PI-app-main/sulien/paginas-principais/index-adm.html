@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Admin - Leandix</title>
+
+  <link rel="stylesheet" href="assets/global.css">
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- API Configuration -->
+  <script src="config.js"></script>
+  <script src="PROGRAMA-PRINCIPAL/api-config.js"></script>
+
+  <!-- script interações -->
+  <script src="interacao.js"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="fundo">
+    <div class="login">
+      <div class="area-formulario">
+        <img src="img2/logo.svg" alt="Leandix" class="logo">
+
+        <form id="loginForm">
+          <label for="username">Username (RA Admin)</label>
+          <input type="text" id="username" name="username" placeholder="Digite seu RA" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+
+          <button type="submit" id="submitBtn">SUBMIT</button>
+
+          <div class="admin-dashboard-container">
+            <a href="animacao4.html" class="admin-dashboard-link">Usuario Access</a>
+          </div>
+        </form>
+      </div>
+      <div class="imagem-lateral">
+        <img src="img2/icon.svg" alt="Ilustração de login">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("loginForm");
+      const submitBtn = document.getElementById("submitBtn");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const ra = document.getElementById("username").value.trim();
+        const senha = document.getElementById("password").value;
+
+        if (!ra || !senha) {
+          alert('Por favor, preencha todos os campos');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Entrando...";
+
+        try {
+          // Usar função login do api-config.js
+          const user = await login(ra, senha);
+
+          // Verificar se é administrador
+          if (user.tipo !== 'administrador') {
+            throw new Error("Acesso negado. Apenas administradores podem acessar esta área.");
+          }
+
+          alert("Login de Administrador realizado com sucesso!");
+          window.location.href = "ADM/animacao3.html";
+
+        } catch (error) {
+          alert(error.message || "Credenciais inválidas.");
+          console.error("Erro ao fazer login:", error);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "SUBMIT";
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

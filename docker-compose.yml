@@ -1,0 +1,77 @@
+services:
+  # ============================================================================
+  # Frontend - Nginx servindo arquivos estáticos
+  # ============================================================================
+  frontend:
+    build:
+      context: ./PI-app-main
+      dockerfile: ../frontend/Dockerfile
+    container_name: sulien-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - sulien-network
+    restart: unless-stopped
+
+  # ============================================================================
+  # Backend - PHP + Apache
+  # ============================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sulien-backend
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: database
+      DB_NAME: sulien_db
+      DB_USER: sulien_user
+      DB_PASS: sulien_pass_2024
+    depends_on:
+      database:
+        condition: service_healthy
+    volumes:
+      - ./PI-app-main/sulien/paginas-principais/img2:/var/www/html/uploads
+    networks:
+      - sulien-network
+    restart: unless-stopped
+
+  # ============================================================================
+  # Database - MySQL 8.0
+  # ============================================================================
+  database:
+    image: mysql:8.0
+    container_name: sulien-database
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_2024
+      MYSQL_DATABASE: sulien_db
+      MYSQL_USER: sulien_user
+      MYSQL_PASSWORD: sulien_pass_2024
+    volumes:
+      - db-data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - sulien-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password_2024" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+# ============================================================================
+# Volumes
+# ============================================================================
+volumes:
+  db-data:
+    driver: local
+
+# ============================================================================
+# Networks
+# ============================================================================
+networks:
+  sulien-network:
+    driver: bridge

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Login — Administração</title>
+<link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-card">
+        <h2>Área Administrativa</h2>
+        <p class="sub">Faça login para acessar o painel</p>
+
+        <form action="validarLogin.php" method="POST">
+
+            <label for="usuario">Usuário</label>
+            <input type="text" name="usuario" id="usuario" required>
+
+            <label for="senha">Senha</label>
+            <input type="password" name="senha" id="senha" required>
+
+            <button type="submit" class="btn-login">Entrar</button>
+
+        </form>
+
+        <a href="animacao2.html" class="btn-voltar">← Voltar ao site</a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-i18n="home_title">Leandix — Armazenamento de Equipamentos</title>
+
+  <!-- Fonte e ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Global (tema + idioma) -->
+  <link rel="stylesheet" href="assets/global.css">
+
+  <link rel="stylesheet" href="home.css" />
+
+  <!-- script principal -->
+  <script src="script.js" defer></script>
+
+  <!-- script interações -->
+  <script src="INTERACOES.JS" defer></script>
+
+  <!-- config (tema + idioma) -->
+  <script src="assets/config.js" defer></script>
+  <!-- API (JWT + Fetch Wrapper) -->
+  <script src="assets/api.js" defer></script>
+</head>
+
+<body>
+  <!-- Loader -->
+  <div id="loader" class="loader" aria-hidden="false"
+    style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg, #eef6ff, rgba(255,255,255,0.6));z-index:9999">
+    <img src="img/logo2.svg" alt="logo" class="loader-logo" style="width:96px;animation:spin 1.2s linear infinite">
+  </div>
+
+  <div id="app" class="app" aria-hidden="true">
+    class="fa-solid fa-gear"></i><span data-i18n="menu_settings">Configurações</span></button>
+    </nav>
+    <div class="sidebar-footer">
+      <button id="logoutBtn" class="ghost" aria-label="Sair" onclick="PGLogin()" data-i18n="menu_sair">Sair</button>
+    </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="main">
+      <header class="topbar">
+        <div class="top-left">
+          <h1 class="page-title" data-i18n="home_page">Home</h1>
+        </div>
+        <div class="top-right">
+          <div id="userShort" class="user-short" role="button" tabindex="0">
+            <img id="userFoto" src="img/avatar-placeholder.png" alt="usuário">
+            <div>
+              <div id="userNomeShort">Usuário</div>
+              <small id="userRole" data-i18n="home_role">Aluno</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="content">
+        <!-- LEFT: area principal -->
+        <section class="left-col">
+          <!-- User card -->
+          <div class="card user-card">
+            <div class="user-left">
+              <div class="avatar-big">
+                <img id="userFotoCard" src="img/avatar-placeholder.png" alt="foto usuário">
+              </div>
+            </div>
+            <div class="user-right">
+              <h2 id="userNome">Nome Completo</h2>
+              <p class="muted">
+                <span data-i18n="home_class">Turma:</span> <span id="userTurma">—</span> •
+                <span data-i18n="home_room">Sala:</span> <span id="userSala">—</span>
+              </p>
+              <div class="user-meta">
+                <div><strong id="userEmprestados">0</strong><small data-i18n="home_borrowed">Emprestados</small></div>
+                <div><strong id="userReservas">0</strong><small data-i18n="home_reservations">Reservas</small></div>
+                <div><strong id="userLimite">5</strong><small data-i18n="home_limit">Limite</small></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calendário principal -->
+          <div class="card calendario-card" id="mainCalendar" aria-live="polite">
+            <div class="cal-header">
+              <button id="prevBtn" class="icon-btn" aria-label="Mês anterior" data-i18n="calendar_prev"><i
+                  class="fa-solid fa-chevron-left"></i></button>
+              <div id="monthYear" class="month-year">Janeiro 2025</div>
+              <button id="nextBtn" class="icon-btn" aria-label="Próximo mês" data-i18n="calendar_next"><i
+                  class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="weekdays">
+              <div data-i18n="week_sun">Dom</div>
+              <div data-i18n="week_mon">Seg</div>
+              <div data-i18n="week_tue">Ter</div>
+              <div data-i18n="week_wed">Qua</div>
+              <div data-i18n="week_thu">Qui</div>
+              <div data-i18n="week_fri">Sex</div>
+              <div data-i18n="week_sat">Sab</div>
+            </div>
+            <div id="dates" class="dates-grid"></div>
+          </div>
+        </section>
+
+        <!-- RIGHT: painel lateral com mini calendário -->
+        <!-- RIGHT: painel lateral com mini calendário (equipamentos removidos) -->
+        <aside class="right-col">
+          <!-- Mini calendário -->
+          <div class="card mini-cal" aria-hidden="false">
+            <div class="mini-top">
+              <button id="miniPrev" class="icon-btn small" aria-label="Mês anterior" data-i18n="calendar_prev"><i
+                  class="fa-solid fa-chevron-left"></i></button>
+              <div id="miniMonth" class="mini-month">Jan 2025</div>
+              <button id="miniNext" class="icon-btn small" aria-label="Próximo mês" data-i18n="calendar_next"><i
+                  class="fa-solid fa-chevron-right"></i></button>
+            </div>
+            <div class="mini-weekdays">
+              <div data-i18n="week_sun_short">D</div>
+              <div data-i18n="week_mon_short">S</div>
+              <div data-i18n="week_tue_short">T</div>
+              <div data-i18n="week_wed_short">Q</div>
+              <div data-i18n="week_thu_short">Q</div>
+              <div data-i18n="week_fri_short">S</div>
+              <div data-i18n="week_sat_short">S</div>
+            </div>
+            <div id="miniDates" class="mini-dates"></div>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <!-- Modal (confirmar ações) -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h3 id="modalTitle" data-i18n="modal_title">Confirmar</h3>
+      <p id="modalMsg">Mensagem</p>
+      <div class="modal-actions">
+        <button id="modalCancel" class="btn ghost" data-i18n="modal_cancel">Cancelar</button>
+        <button id="modalConfirm" class="btn primary" data-i18n="modal_confirm">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

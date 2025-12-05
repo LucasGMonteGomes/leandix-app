@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Professor - Admin</title>
+    <link rel="stylesheet" href="configura.css">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Cadastrar Novo Professor</h1>
+            <button onclick="history.back()" class="btn-secondary">Voltar</button>
+        </header>
+
+        <form id="professorForm" class="form-container">
+            <div class="form-group">
+                <label for="fullName">Nome Completo *</label>
+                <input type="text" id="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username *</label>
+                <input type="text" id="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Telefone</label>
+                <input type="tel" id="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Senha *</label>
+                <input type="password" id="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="userType">Tipo de Usuário *</label>
+                <select id="userType" required>
+                    <option value="">Selecione...</option>
+                    <option value="USER">Aluno</option>
+                    <option value="PROFESSOR">Professor</option>
+                    <option value="ADMIN">Administrador</option>
+                </select>
+            </div>
+
+            <!-- Campo de turno - só aparece para PROFESSOR -->
+            <div id="shiftGroup" class="form-group" style="display: none;">
+                <label for="shift">Turno *</label>
+                <select id="shift">
+                    <option value="">Selecione...</option>
+                    <option value="MORNING">Manhã (08:00 - 12:00)</option>
+                    <option value="AFTERNOON">Tarde (13:00 - 17:00)</option>
+                    <option value="NIGHT">Noite (18:00 - 22:00)</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Cadastrar</button>
+                <button type="button" class="btn-secondary" onclick="history.back()">Cancelar</button>
+            </div>
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Cadastrar Professor - Admin</title>
+                <link rel="stylesheet" href="configura.css">
+                <link rel="stylesheet" href="home.css">
+            </head>
+
+            <body>
+                <div class="container">
+                    <header>
+                        <h1>Cadastrar Novo Professor</h1>
+                        <button onclick="history.back()" class="btn-secondary">Voltar</button>
+                    </header>
+
+                    <form id="professorForm" class="form-container">
+                        <div class="form-group">
+                            <label for="fullName">Nome Completo *</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username">Username *</label>
+                            <input type="text" id="username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Senha *</label>
+                            <input type="password" id="password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="userType">Tipo de Usuário *</label>
+                            <select id="userType" required>
+                                <option value="">Selecione...</option>
+                                <option value="USER">Aluno</option>
+                                <option value="PROFESSOR">Professor</option>
+                                <option value="ADMIN">Administrador</option>
+                            </select>
+                        </div>
+
+                        <!-- Campo de turno - só aparece para PROFESSOR -->
+                        <div id="shiftGroup" class="form-group" style="display: none;">
+                            <label for="shift">Turno *</label>
+                            <select id="shift">
+                                <option value="">Selecione...</option>
+                                <option value="MORNING">Manhã (08:00 - 12:00)</option>
+                                <option value="AFTERNOON">Tarde (13:00 - 17:00)</option>
+                                <option value="NIGHT">Noite (18:00 - 22:00)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Cadastrar</button>
+                            <button type="button" class="btn-secondary" onclick="history.back()">Cancelar</button>
+                        </div>
+                    </form>
+
+                    <div id="groupInfo" class="info-box" style="display: none;">
+                        <p>✅ Professor cadastrado com sucesso!</p>
+                        <p>Grupo de rodízio atribuído: <strong id="assignedGroup"></strong></p>
+                    </div>
+                </div>
+
+                <!-- API (JWT + Fetch Wrapper) -->
+                <script src="../assets/api.js" defer></script>
+
+                <!-- script interações -->
+                <script src="INTERACOES.JS" defer></script>
+            </body>
+
+            </html>

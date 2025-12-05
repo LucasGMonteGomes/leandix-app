@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato | Sulien</title>
+  
+  <link rel="stylesheet" href="formulario.css">
+
+  <script src="Interacao.js"></script>
+  
+  <script src="JavaScript-PerguntasAnimadas/PerguntasAnimadasEmpresa.js" ></script>
+
+</head>
+
+<body>
+
+<header class="top-bar">
+  <a href="animacao2.html">
+    <img src="img/vetorsulien.svg" 
+         alt="Sulien" 
+         class="logo" 
+         style="cursor: pointer;">
+  </a>
+</header>
+
+<section class="form-section">
+  <div class="form-container">
+
+    <h2>Entre em Contato com a <span>Sulien</span></h2>
+    <p class="subtext">Preencha o formulário para que possamos retornar o mais rápido possível.</p>
+
+    <form class="contact-form" action="processar_form.php" method="POST">
+
+      <div class="input-box">
+        <label>Seu nome completo</label>
+        <input type="text" name="nome" required>
+      </div>
+
+      <div class="input-box">
+        <label>E-mail</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <div class="input-box">
+        <label>Telefone</label>
+        <input type="text" name="telefone">
+      </div>
+
+      <div class="input-box">
+        <label>Você representa uma empresa?</label>
+        <select name="empresa" required>
+          <option value="" disabled selected hidden>Selecione…</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+
+
+<!--  
+  Container que guarda os campos relacionados à empresa.
+  Ele começa com a classe "empresa-hidden", que faz esse bloco ficar
+  totalmente oculto (max-height: 0, opacity: 0) ao carregar o site.
+-->
+<div id="empresa-campos" class="empresa-hidden">
+
+  <!--  
+    Cada um destes blocos representa uma pergunta.
+    Eles usam a classe "empresa-item", que permite animar cada item
+    individualmente com fade + slide quando o usuário selecionar "Sim".
+  -->
+
+  <div class="input-box empresa-item">
+    <!-- Rótulo do campo onde o usuário informa o nome da empresa -->
+    <label>Nome da Empresa</label>
+
+    <!-- Campo de texto para o nome da empresa -->
+    <input type="text" name="nome_empresa">
+  </div>
+
+  <div class="input-box empresa-item">
+    <!-- Rótulo do campo onde o usuário informa o CNPJ -->
+    <label>CNPJ</label>
+
+    <!-- Campo de texto para digitar o CNPJ -->
+    <input type="text" name="cnpj">
+  </div>
+
+  <div class="input-box empresa-item">
+    <!-- Rótulo da área de atuação da empresa -->
+    <label>Área de atuação</label>
+
+    <!-- Campo de texto para o ramo/segmento da empresa -->
+    <input type="text" name="area_atuacao">
+  </div>
+
+  <div class="input-box empresa-item">
+    <!-- Rótulo para selecionar o porte/tamanho da empresa -->
+    <label>Tamanho da empresa</label>
+
+    <!-- Menu de seleção com opções de tamanho da empresa -->
+    <select name="tamanho_empresa">
+      <option value="" disabled selected hidden>Selecione…</option>
+      <option value="MEI">MEI</option>
+      <option value="Pequena">Pequena</option>
+      <option value="Média">Média</option>
+      <option value="Grande">Grande</option>
+    </select>
+  </div>
+
+</div>
+
+
+
+
+<div class="input-box">
+  <label>Assunto</label>
+  <select name="assunto" required>
+    <option value="" disabled selected hidden>Selecione…</option>
+    <option value="Contratar serviços Sulien">Contratar serviços Sulien</option>
+    <option value="Suporte técnico">Suporte técnico</option>
+    <option value="Dúvidas sobre o Leandix">Dúvidas sobre o Leandix</option>
+    <option value="Outros">Outros</option>
+  </select>
+</div>
+
+      <div class="input-box">
+        <label>Mensagem ( Opcional )</label>
+        <textarea name="mensagem" rows="6" ></textarea>
+      </div>
+
+      <button type="submit" class="send-btn">Enviar Mensagem</button>
+
+    </form>
+  </div>
+</section>
+
+
+<script type="module">
+  // Importa a função "initializeValidations" do arquivo externo.
+  // O "type='module'" permite usar import/export no JavaScript,
+  // tornando o código organizado e modular.
+  import { initializeValidations } from "./JavaScript-MicroServicos/ValidateFormFields.js";
+
+  // Chama a função importada.
+  // Esse comando ativa todas as validações do formulário,
+  // conectando os micro serviços aos campos (email, telefone, CNPJ, etc.)
+  // imediatamente quando o script é carregado no navegador.
+  initializeValidations();
+</script>
+
+
+</body>
+</html>

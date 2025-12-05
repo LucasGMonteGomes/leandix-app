@@ -1,0 +1,6 @@
+# Diga ao servidor para tratar arquivos .txt como JSON de manifest
+AddType application/manifest+json .txt
+
+# Evita injeção automática de código do InfinityFree
+RemoveHandler .txt
+RemoveType .txt

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-i18n="reservations_title">Reservas — Leandix</title>
+
+  <!-- Fonte Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/global.css">
+  <link rel="stylesheet" href="reservas.css">
+  <link rel="stylesheet" href="../assets/animations.css">
+
+  <!-- Scripts -->
+  <script src="../assets/api.js"></script>
+  <script src="../assets/toast.js" defer></script>
+  <script src="reservas.js" defer></script>
+</head>
+
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar" aria-label="Navegação principal">
+    <div class="brand">
+      <img class="brand-logo" src="img/logo2.svg" alt="Leandix">
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Menu">
+      <button class="nav-btn" data-route="home" title="home" onclick="window.location.href='home.html'">
+        <i class="fa-solid fa-house"></i><span data-i18n="menu_home">Home</span>
+      </button>
+
+      <button class="nav-btn" data-route="equipamentos" title="Equipamentos"
+        onclick="window.location.href='usuario.html'">
+        <i class="fa-solid fa-user"></i><span data-i18n="menu_usuario">Usuário</span>
+      </button>
+
+      <button class="nav-btn active" data-route="calendario" title="calendario">
+        <i class="fa-solid fa-calendar-check"></i><span data-i18n="menu_reservas">Reservas</span>
+      </button>
+
+      <button class="nav-btn" data-route="Configurações" title="Configurações"
+        onclick="window.location.href='configura.html'">
+        <i class="fa-solid fa-gear"></i><span data-i18n="menu_config">Configurações</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="logoutBtn" class="ghost" aria-label="Sair" data-i18n="menu_sair">Sair</button>
+    </div>
+  </aside>
+
+  <!-- Área principal -->
+  <main>
+    <section class="card">
+      <header class="card-header">
+        <h1>
+          <span data-i18n="reserva_step">Reserva — passo</span>
+          <span id="current-step">1</span>
+          <span data-i18n="reserva_of">de</span>
+          <span id="total-steps">4</span>
+        </h1>
+
+        <div class="muted">
+          <span data-i18n="user_fullname">Usuário:</span>
+          <strong id="user-name">Fulano de Tal</strong>
+        </div>
+      </header>
+
+      <div class="step-content" id="step-content">
+        <!-- Passo 1: Calendário -->
+        <div class="step-panel" data-panel="1">
+          <div class="calendar-controls">
+            <div>
+              <button id="prev-month" title="Mês anterior" data-i18n="calendar_prev" style="font-weight: 900;"><i
+                  class="fa-solid fa-chevron-left"></i></button>
+              <button id="next-month" title="Próximo mês" data-i18n="calendar_next" style="font-weight: 900;"><i
+                  class="fa-solid fa-chevron-right"></i></button>
+            </div>
+
+            <div class="muted" id="calendar-title"></div>
+
+            <div>
+              <label class="muted" data-i18n="days_label">Dias:</label>
+              <select id="days-count">
+                <option value="1">1 dia</option>
+                <option value="2">2 dias</option>
+                <option value="3">3 dias</option>
+                <option value="4">4 dias</option>
+                <option value="5">5 dias</option>
+                <option value="6">6 dias</option>
+                <option value="7">7 dias</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:8px">
+            <small class="muted" data-i18n="calendar_click">
+              Clique numa data (domingo está desabilitado). O sistema seleciona um bloco de 7 dias automaticamente.
+            </small>
+
+            <div style="margin-left:auto">
+              <button class="btn ghost" id="align-business" data-i18n="align_monday" style="font-weight: 900;">
+                Alinhar a segunda-feira
+              </button>
+            </div>
+          </div>
+
+          <div class="calendar" id="calendar"></div>
+        </div>
+
+        <!-- Passo 2: Salas -->
+        <div class="step-panel" data-panel="2" style="display:none">
+          <h3 data-i18n="rooms_title">Salas disponíveis</h3>
+          <p class="muted" data-i18n="rooms_subtitle">Selecione as salas desejadas para o período.</p>
+          <div class="list" id="rooms-list"></div>
+
+          <div style="margin-top:12px">
+            <button id="skip-rooms" class="btn ghost" data-i18n="skip_rooms" style="font-weight: 900;">Pular aluguel de
+              salas</button>
+          </div>
+        </div>
+
+        <!-- Passo 3: Equipamentos -->
+        <div class="step-panel" data-panel="3" style="display:none">
+          <h3 data-i18n="equipment_title">Equipamentos</h3>
+          <p class="muted" data-i18n="equipment_subtitle">Selecione equipamentos, caso queira.</p>
+          <div class="list" id="equipment-list"></div>
+
+          <div style="margin-top:12px">
+            <button id="skip-equipment" class="btn ghost" data-i18n="skip_equipment" style="font-weight: 900;">Pular
+              equipamentos</button>
+          </div>
+        </div>
+
+        <!-- Passo 4: Resumo -->
+        <div class="step-panel" data-panel="4" style="display:none">
+          <h3 data-i18n="summary_title">Resumo da Reserva</h3>
+
+          <div class="summary" id="summary"></div>
+
+          <div style="margin-top:12px">
+            <label class="muted" data-i18n="obs_label">Observações (opcional)</label>
+            <textarea id="obs" rows="3"
+              style="width:100%;padding:10px;border-radius:8px;border:1px solid #000000"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="left">
+          <button id="backBtn" class="btn ghost" style=" font-weight: 900;" data-i18n="back_btn">
+            Voltar
+          </button>
+
+          <button id="nextBtn" class="btn primary" data-i18n="next_btn" style="font-weight: 900;">
+            Próximo
+          </button>
+        </div>
+
+        <div>
+          <button id="confirmBtn" class="btn primary" style="display:none; font-weight: 900;"
+            data-i18n="confirm_reservation">
+            Confirmar Reserva
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Proteção de rota
+    requireAuth();
+
+    // Logout handler
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+  </script>
+</body>
+
+</html>

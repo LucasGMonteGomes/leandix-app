@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Transição - Sulien</title>
+
+<style>
+/* ======== Fundo idêntico ao site ======== */
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+  background: linear-gradient(90deg, #000000 0%, #0F0F5A 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ======== Logo no centro ======== */
+.logo {
+  width: 850px;
+  opacity: 0;
+  animation: fadeZoom 1.8s ease forwards;
+  z-index: 5;
+}
+
+/* ======== Overlay animado (efeito profissional) ======== */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 250%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(234,127,12,0.9), rgba(255,180,80,0.9));
+  transform: skewX(-20deg);
+  box-shadow: 0px 0px 45px rgba(234,127,12,0.7);
+  animation: wipe 1.5s ease-in-out forwards;
+  z-index: 2;
+}
+
+/* ======== Animações ======== */
+@keyframes fadeZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.0);
+  }
+}
+
+@keyframes wipe {
+  0% {
+    left: -150%;
+  }
+  50% {
+    left: -60%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<!-- Overlay de animação -->
+<div class="overlay"></div>
+
+<!-- Logo no centro -->
+<img src="img/logo2sulien.png" alt="Logo Sulien" class="logo">
+
+<script>
+  // Redireciona ao fim da animação
+  setTimeout(() => {
+    window.location.href = "index.html";
+  }, 2500);
+</script>
+
+</body>
+</html>

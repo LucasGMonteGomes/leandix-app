@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupos de Professores - Admin</title>
+    <link rel="stylesheet" href="home.css">
+    <style>
+        .shift-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: 2px solid #3498db;
+            background: white;
+            color: #3498db;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .groups-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .group-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: white;
+        }
+
+        .group-header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .professor-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Grupos de Rodízio - Professores</h1>
+            <button onclick="history.back()" class="btn-secondary">Voltar</button>
+        </header>
+
+        <div class="shift-tabs">
+            <button class="tab-btn active" data-shift="MORNING">Manhã</button>
+            <button class="tab-btn" data-shift="AFTERNOON">Tarde</button>
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Grupos de Professores - Admin</title>
+                <link rel="stylesheet" href="home.css">
+                <style>
+                    .shift-tabs {
+                        display: flex;
+                        gap: 10px;
+                        margin-bottom: 20px;
+                    }
+
+                    .tab-btn {
+                        padding: 10px 20px;
+                        border: 2px solid #3498db;
+                        background: white;
+                        color: #3498db;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        transition: all 0.3s;
+                    }
+
+                    .tab-btn.active {
+                        background: #3498db;
+                        color: white;
+                    }
+
+                    .groups-container {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                        gap: 20px;
+                    }
+
+                    .group-card {
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        padding: 15px;
+                        background: white;
+                    }
+
+                    .group-header {
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: #3498db;
+                        margin-bottom: 10px;
+                    }
+
+                    .professor-item {
+                        padding: 8px;
+                        border-bottom: 1px solid #eee;
+                    }
+                </style>
+            </head>
+
+            <body>
+                <div class="container">
+                    <header>
+                        <h1>Grupos de Rodízio - Professores</h1>
+                        <button onclick="history.back()" class="btn-secondary">Voltar</button>
+                    </header>
+
+                    <div class="shift-tabs">
+                        <button class="tab-btn active" data-shift="MORNING">Manhã</button>
+                        <button class="tab-btn" data-shift="AFTERNOON">Tarde</button>
+                        <button class="tab-btn" data-shift="NIGHT">Noite</button>
+                    </div>
+
+                    <div id="groupsContainer" class="groups-container">
+                        <!-- Grupos serão carregados aqui -->
+                    </div>
+                </div>
+
+                <!-- API (JWT + Fetch Wrapper) -->
+                <script src="../assets/api.js" defer></script>
+
+                <!-- script interações -->
+                <script src="INTERACOES.JS" defer></script>
+            </body>
+
+            </html>
