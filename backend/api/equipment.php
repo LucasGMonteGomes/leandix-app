@@ -26,7 +26,6 @@ try {
             break;
 
         case 'list':
-            Session::requireAuth();
             handleList($conn);
             break;
 
