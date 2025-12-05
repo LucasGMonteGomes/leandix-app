@@ -6,10 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const datesEl = document.getElementById('dates');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
-  const miniMonth = document.getElementById('miniMonth');
-  const miniDates = document.getElementById('miniDates');
-  const miniPrev = document.getElementById('miniPrev');
-  const miniNext = document.getElementById('miniNext');
 
   const userNome = document.getElementById('userNome');
   const userTurma = document.getElementById('userTurma');
@@ -100,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     monthYear.textContent = currentDate.toLocaleDateString('pt-BR',{month:'short', year:'numeric'});
-    miniMonth.textContent = currentDate.toLocaleDateString('pt-BR',{month:'short', year:'numeric'});
     await carregarReservas(month+1,year);
     datesEl.innerHTML = '';
     const firstDay = new Date(year,month,1).getDay();
@@ -134,40 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       datesEl.appendChild(div);
     }
-    renderMiniCalendar(month,year);
-  }
-
-  function renderMiniCalendar(month,year){
-    miniDates.innerHTML = '';
-    const firstDay = new Date(year,month,1).getDay();
-    const lastDate = new Date(year,month+1,0).getDate();
-    for(let i=0;i<firstDay;i++){
-      const e = document.createElement('div');
-      e.className='mdate empty';
-      miniDates.appendChild(e);
-    }
-    for(let d=1; d<=lastDate; d++){
-      const m = document.createElement('div');
-      m.className='mdate';
-      m.textContent = d;
-      m.tabIndex = 0;
-      const today = new Date();
-      if(d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) m.classList.add('today');
-      const some = reservasCache.find(r => Number(r.dia) === d);
-      if(some){
-        m.classList.add('has');
-        const badge = document.createElement('span');
-        badge.className='badge';
-        m.appendChild(badge);
-      }
-      if(selectedDay && selectedDay.dia === d && selectedDay.mes === month+1 && selectedDay.ano === year) m.classList.add('selected');
-      m.addEventListener('click', ()=>{
-        selectDay(d, month+1, year);
-        const mainCal = document.getElementById('mainCalendar');
-        if(mainCal) mainCal.scrollIntoView({behavior:'smooth',block:'center'});
-      });
-      miniDates.appendChild(m);
-    }
   }
 
   function selectDay(dia,mes,ano){
@@ -192,8 +153,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   prevBtn.addEventListener('click', ()=>{ currentDate.setMonth(currentDate.getMonth()-1); renderCalendar(); });
   nextBtn.addEventListener('click', ()=>{ currentDate.setMonth(currentDate.getMonth()+1); renderCalendar(); });
-  miniPrev.addEventListener('click', ()=>{ currentDate.setMonth(currentDate.getMonth()-1); renderCalendar(); });
-  miniNext.addEventListener('click', ()=>{ currentDate.setMonth(currentDate.getMonth()+1); renderCalendar(); });
 
   (async function init(){
     await carregarUsuario();
