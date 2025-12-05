@@ -40,15 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 300);
   }, 1000);
 
-  async function fetchJSON(url, opts){
-    const r = await fetch(url, opts);
-    if (!r.ok) throw new Error(r.status);
-    return await r.json();
+  const API = window.API_BASE_URL || '';
+
+  async function apiFetch(path, opts = {}) {
+    const resp = await fetch(`${API}${path}`, {
+      credentials: 'include',
+      ...opts
+    });
+    if (!resp.ok) throw new Error(resp.status);
+    return await resp.json();
   }
 
   async function carregarUsuario(){
     try {
-      const resp = await fetchJSON('/api/profile.php?action=get', { credentials: 'include' });
+      const resp = await apiFetch('/api/profile.php?action=get');
       const dados = resp && resp.user ? resp.user : null;
       if (!dados) throw new Error('sem dados');
       usuario = dados;
@@ -78,10 +83,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function carregarReservas(mes,ano){
-    mes = Number(mes);
-    ano = Number(ano);
-    const r = await fetchJSON(`/api/reservas?mes=${mes}&ano=${ano}`);
-    reservasCache = r || [];
+    try {
+      const r = await apiFetch('/api/reservations.php?action=list');
+      const list = (r && r.reservations) || [];
+      reservasCache = list.map(item => {
+        const d = new Date(item.data_inicio.replace(' ', 'T'));
+        return { dia: d.getDate(), mes: d.getMonth() + 1, ano: d.getFullYear(), status: item.status };
+      });
+    } catch (e) {
+      reservasCache = [];
+    }
     return reservasCache;
   }
 
