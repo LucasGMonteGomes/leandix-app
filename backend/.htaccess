@@ -1,19 +1,16 @@
-# CORS é gerenciado pelo PHP (config/cors.php)
-# Não definir headers CORS aqui para permitir controle dinâmico
-
-# Habilitar mod_rewrite
 RewriteEngine On
 
-# Permitir acesso público aos arquivos PHP (Apache 2.4+)
 <IfModule mod_authz_core.c>
   Require all granted
 </IfModule>
 
-# Permitir requisições OPTIONS (preflight)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/$1 [L]
+
 RewriteCond %{REQUEST_METHOD} OPTIONS
 RewriteRule ^(.*)$ $1 [R=200,L]
 
-# PHP settings
 php_value upload_max_filesize 10M
 php_value post_max_size 10M
 php_value max_execution_time 300
